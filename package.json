@@ -1,0 +1,37 @@
+{
+  "name": "ngx-mq",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "ng-packagr -p ng-package.json",
+    "build:watch": "ng-packagr -w -p ng-package.json",
+    "format": "prettier --write .",
+    "clean": "rimraf dist"
+  },
+  "keywords": [],
+  "sideEffects": false,
+  "author": "Myroslav Martsin",
+  "license": "ISC",
+  "peerDependencies": {
+    "@angular/common": ">=16 <21",
+    "@angular/core": ">=16 <21"
+  },
+  "devDependencies": {
+    "@angular/common": "^18.2.14",
+    "@angular/compiler": "^18.2.14",
+    "@angular/compiler-cli": "^18.2.14",
+    "@angular/core": "^18.2.14",
+    "@types/jest": "^29.5.14",
+    "concurrently": "^9.2.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.6.2",
+    "jest-preset-angular": "14.2.4",
+    "ng-packagr": "^18.2.1",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  }
+}

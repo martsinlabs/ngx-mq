@@ -1,0 +1,7 @@
+# Ignore artifacts:
+node_modules
+dist
+.angular
+demo/dist
+demo/node_modules
+demo/.angular
