@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { up, down, between } from './api';
-import { isSignal, Signal } from '@angular/core';
+import { Signal, isSignal } from '@angular/core';
 import { provideBreakpoints } from './providers';
+import { up, down, between, matchMediaSignal } from './api';
 
 describe('Public API', () => {
   beforeEach(() => {
@@ -10,24 +10,43 @@ describe('Public API', () => {
     });
   });
 
-  it('up() should return a boolean signal', () => {
-    const signal: Signal<boolean> = TestBed.runInInjectionContext(() => up('md'));
-    expect(isSignal(signal)).toBe(true);
-    expect(typeof signal()).toBe('boolean');
-    expect(signal.toString()).toContain('up');
+  describe('up()', () => {
+    it('should return a boolean signal', () => {
+      const signal: Signal<boolean> = TestBed.runInInjectionContext(() => up('md'));
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('up');
+    });
   });
 
-  it('down() should return a boolean signal', () => {
-    const signal = TestBed.runInInjectionContext(() => down('md'));
-    expect(isSignal(signal)).toBe(true);
-    expect(typeof signal()).toBe('boolean');
-    expect(signal.toString()).toContain('down');
+  describe('down()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => down('md'));
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('down');
+    });
   });
 
-  it('between() should return a boolean signal', () => {
-    const signal = TestBed.runInInjectionContext(() => between('sm', 'md'));
-    expect(isSignal(signal)).toBe(true);
-    expect(typeof signal()).toBe('boolean');
-    expect(signal.toString()).toContain('between');
+  describe('between()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => between('sm', 'md'));
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('between');
+    });
+  });
+
+  describe('matchMediaSignal()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => matchMediaSignal('(prefers-color-scheme: dark)'));
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('matchMediaSignal');
+    });
   });
 });

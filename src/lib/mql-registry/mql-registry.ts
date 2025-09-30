@@ -10,7 +10,7 @@ const getRegistry = (): MqlRegistry => {
   return (realmGlobal[REGISTRY_KEY] ??= new Map()) as MqlRegistry;
 };
 
-const createRetainToken = (): MqRetainToken => Symbol('retain-token');
+const createRetainToken = (query: string): MqRetainToken => Symbol(`mq-retainer:${query}`);
 
 const createMqHandle = (query: string): MqHandle => {
   const mql: MediaQueryList = matchMedia(query);
@@ -24,10 +24,10 @@ const createMqHandle = (query: string): MqHandle => {
 };
 
 export function retain(query: string): MqRetainRef {
-  const token: MqRetainToken = createRetainToken();
+  const token: MqRetainToken = createRetainToken(query);
 
   // SSR-safe fallback
-  if (typeof matchMedia !== 'function') {
+  if (typeof globalThis.matchMedia !== 'function') {
     return { signal: createSignal(false).asReadonly(), token };
   }
 
@@ -45,17 +45,19 @@ export function retain(query: string): MqRetainRef {
   return { signal: handle.signal.asReadonly(), token };
 }
 
-export function release(query: string, token: MqRetainToken): void {
+export function release(query: string, token: MqRetainToken): boolean {
   const registry: MqlRegistry = getRegistry();
 
   let handle: MqHandle | undefined = registry.get(query);
 
-  if (!handle) return;
+  if (!handle) return false;
 
-  handle.retainers.delete(token);
+  const removed: boolean = handle.retainers.delete(token);
 
   if (handle.retainers.size === 0) {
     removeChangeListenerFromMql(handle.mql, handle.onChange);
     registry.delete(query);
   }
+
+  return removed;
 }

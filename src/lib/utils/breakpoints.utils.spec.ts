@@ -1,10 +1,10 @@
-import { applyMaxEpsilon, normalizeBreakpoints, resolveBreakpoint } from './breakpoints.utils';
+import { applyMaxEpsilon, normalizeBreakpoints, resolveBreakpoint, validateEpsilon } from './breakpoints.utils';
 import { EnvironmentInjector, runInInjectionContext, Injector } from '@angular/core';
 import { provideBreakpoints } from '../providers';
 import { MQ_BREAKPOINT_EPSILON } from '../tokens';
 import { TestBed } from '@angular/core/testing';
 
-describe('resolveBreakpoint', () => {
+describe('resolveBreakpoint()', () => {
   it('should throw if no breakpoints were provided', () => {
     runInInjectionContext(TestBed.inject(EnvironmentInjector), () => {
       expect(() => resolveBreakpoint('md')).toThrow(/No breakpoints provided/);
@@ -34,7 +34,7 @@ describe('resolveBreakpoint', () => {
   });
 });
 
-describe('normalizeBreakpoints', () => {
+describe('normalizeBreakpoints()', () => {
   it('trims keys and keeps numeric values as-is', () => {
     const input = { ' sm ': 640, md: 768 };
     const out = normalizeBreakpoints(input);
@@ -60,7 +60,31 @@ describe('normalizeBreakpoints', () => {
   });
 });
 
-describe('applyMaxEpsilon', () => {
+describe('validateEpsilon()', () => {
+  it('should not throw for valid values in (0,1]', () => {
+    expect(() => validateEpsilon(0.5)).not.toThrow();
+    expect(() => validateEpsilon(1)).not.toThrow();
+    expect(() => validateEpsilon(0.0001)).not.toThrow();
+  });
+
+  it('should throw for 0 or less', () => {
+    expect(() => validateEpsilon(0)).toThrow();
+    expect(() => validateEpsilon(-0.1)).toThrow();
+    expect(() => validateEpsilon(-Infinity)).toThrow();
+  });
+
+  it('should throw for greater than 1', () => {
+    expect(() => validateEpsilon(1.01)).toThrow();
+    expect(() => validateEpsilon(2)).toThrow();
+    expect(() => validateEpsilon(Infinity)).toThrow();
+  });
+
+  it('should throw for NaN or non-finite values', () => {
+    expect(() => validateEpsilon(NaN)).toThrow();
+  });
+});
+
+describe('applyMaxEpsilon()', () => {
   it('should use default epsilon (0.02) if none provided', () => {
     runInInjectionContext(TestBed.inject(EnvironmentInjector), () => {
       const result = applyMaxEpsilon(100);

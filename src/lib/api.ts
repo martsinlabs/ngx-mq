@@ -39,7 +39,7 @@ export function between(minBp: string, maxBp: string): Signal<boolean> {
 }
 
 export function matchMediaSignal(query: string): Signal<boolean> {
-  isDevMode() && assertInInjectionContext(between);
+  isDevMode() && assertInInjectionContext(matchMediaSignal);
 
   const media: string = normalizeQuery(query);
   const consumer: Signal<boolean> = createConsumer(media);

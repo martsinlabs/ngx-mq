@@ -1,6 +1,6 @@
 import { isDevMode, Provider } from '@angular/core';
 import { MQ_BREAKPOINT_EPSILON, MQ_BREAKPOINTS } from './tokens';
-import { normalizeBreakpoints } from './utils/breakpoints.utils';
+import { normalizeBreakpoints, validateEpsilon } from './utils/breakpoints.utils';
 import { MqBreakpoints } from './models';
 import {
   BOOTSTRAP_BREAKPOINTS,
@@ -26,9 +26,7 @@ export function provideMaterialBreakpoints(): Provider {
 }
 
 export function provideBreakpointEpsilon(epsilon: number = DEFAULT_BREAKPOINT_EPSILON): Provider {
-  if (isDevMode() && (!Number.isFinite(epsilon) || epsilon <= 0 || epsilon >= 1)) {
-    throw new Error(`[ngx-mq] Epsilon must be in (0, 1). Got ${epsilon}.`);
-  }
+  if (isDevMode()) validateEpsilon(epsilon);
 
   return { provide: MQ_BREAKPOINT_EPSILON, useValue: epsilon };
 }

@@ -6,7 +6,7 @@ import * as registry from './mql-registry';
 @Component({ standalone: true, template: `` })
 class HostComponent {}
 
-describe('retainUntilDestroy', () => {
+describe('retainUntilDestroy()', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HostComponent],

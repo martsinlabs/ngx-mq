@@ -56,6 +56,12 @@ export function normalizeBreakpoints(bps: MqBreakpoints): Readonly<MqBreakpoints
   return Object.freeze(out);
 }
 
+export function validateEpsilon(epsilon: number): void {
+  if (!Number.isFinite(epsilon) || epsilon <= 0 || epsilon > 1) {
+    throw new Error(`[ngx-mq] Epsilon must be in (0, 1]. Got: ${epsilon}`);
+  }
+}
+
 export function applyMaxEpsilon(value: number): number {
   const epsilon: number = inject(MQ_BREAKPOINT_EPSILON, { optional: true }) ?? 0.02;
 
