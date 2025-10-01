@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';
 import { MqBreakpoints } from 'ngx-mq';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, MatListModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    imports: [CommonModule, MatListModule],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   isSmallAndUp: Signal<boolean> = up('sm');
