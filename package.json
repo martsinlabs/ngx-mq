@@ -15,8 +15,8 @@
   "author": "Myroslav Martsin",
   "license": "ISC",
   "peerDependencies": {
-    "@angular/common": ">=16 <21",
-    "@angular/core": ">=16 <21"
+    "@angular/core": ">=16 <19",
+    "@angular/common": ">=16 <19"
   },
   "devDependencies": {
     "@angular/common": "^18.2.14",
