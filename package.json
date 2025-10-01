@@ -14,15 +14,12 @@
   "sideEffects": false,
   "author": "Myroslav Martsin",
   "license": "ISC",
+  "workspaces": ["demo"],
   "peerDependencies": {
     "@angular/common": ">=19 <21",
     "@angular/core": ">=19 <21"
   },
   "devDependencies": {
-    "@angular/common": "^20.2.3",
-    "@angular/compiler": "^20.2.3",
-    "@angular/compiler-cli": "^20.2.3",
-    "@angular/core": "^20.2.3",
     "@types/jest": "^30.0.0",
     "concurrently": "^9.2.1",
     "jest": "^30.2.0",
