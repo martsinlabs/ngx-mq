@@ -14,7 +14,7 @@ const createRetainToken = (query: string): MqRetainToken => Symbol(`mq-retainer:
 
 const createMqHandle = (query: string): MqHandle => {
   const mql: MediaQueryList = matchMedia(query);
-  const signal: WritableSignal<boolean> = createSignal(mql.matches);
+  const signal: WritableSignal<boolean> = createSignal(mql.matches, { debugName: `ngx-mq: ${query}` });
 
   const onChange = (event?: MediaQueryListEvent) => signal.set(event?.matches ?? mql.matches);
 

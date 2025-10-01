@@ -1,11 +1,17 @@
-import { Signal } from '@angular/core';
-import { createComputed } from '@angular/core/primitives/signals';
+import { isDevMode, Signal } from '@angular/core';
+import { createComputed, SIGNAL } from '@angular/core/primitives/signals';
 import { MqRetainRef, retainUntilDestroy } from './mql-registry';
 
-export function createConsumer(query: string): Signal<boolean> {
+export function createConsumer(query: string, debugName?: string): Signal<boolean> {
   const retainRef: MqRetainRef = retainUntilDestroy(query);
 
-  return createComputed(() => retainRef.signal());
+  const getter = createComputed(() => retainRef.signal());
+
+  if (isDevMode()) {
+    getter[SIGNAL].debugName = debugName;
+  }
+
+  return getter satisfies Signal<boolean>;
 }
 
 export function createConsumerLabel(descriptor: string): string {
