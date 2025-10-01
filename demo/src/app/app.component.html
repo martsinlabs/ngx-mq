@@ -1,0 +1,33 @@
+<header>
+  <h1>Media Query Playground</h1>
+</header>
+
+<mat-list role="list">
+  <mat-list-item>
+    <b>
+      up('sm'): <span class="mq-result">{{ isSmallAndUp() }}</span>
+    </b>
+    - Viewport width ≥ {{ breakpoints['sm'] }}px
+  </mat-list-item>
+
+  <mat-list-item>
+    <b>
+      down("md"): <span class="mq-result">{{ isBelowMedium() }}</span>
+    </b>
+    - Viewport width < {{ breakpoints['md'] }}px
+  </mat-list-item>
+
+  <mat-list-item>
+    <b>
+      between('sm', 'lg'): <span class="mq-result">{{ isBetweenSmallAndLarge() }}</span>
+    </b>
+    - Viewport width between {{ breakpoints['sm'] }}px and {{ breakpoints['lg'] }}px
+  </mat-list-item>
+
+  <mat-list-item>
+    <b>
+      matchMediaSignal('(hover: hover)'): <span class="mq-result">{{ canHover() }}</span>
+    </b>
+    - Can hover
+  </mat-list-item>
+</mat-list>

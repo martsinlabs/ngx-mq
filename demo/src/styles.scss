@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$theme: mat.define-theme(
+  (
+    color: (
+      primary: mat.$violet-palette,
+    ),
+    typography: (
+      plain-family: (
+        'Inter',
+        sans-serif,
+      ),
+    ),
+    density: (
+      scale: -1,
+    ),
+  )
+);
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+
+  @include mat.all-component-themes($theme);
+}
+
+body {
+  padding: 24px;
+  font-family: 'Inter', sans-serif;
+}
