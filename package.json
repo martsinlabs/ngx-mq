@@ -11,9 +11,10 @@
     "clean": "rimraf dist"
   },
   "keywords": [],
+  "license": "ISC",
   "sideEffects": false,
   "author": "Myroslav Martsin",
-  "license": "ISC",
+  "workspaces": ["demo"],
   "peerDependencies": {
     "@angular/core": ">=16 <19",
     "@angular/common": ">=16 <19"

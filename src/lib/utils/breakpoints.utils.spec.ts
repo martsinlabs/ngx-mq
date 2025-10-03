@@ -40,7 +40,7 @@ describe('normalizeBreakpoints()', () => {
     const out = normalizeBreakpoints(input);
 
     expect(new Set(Object.keys(out))).toEqual(new Set(['sm', 'md']));
-    expect(out).toMatchObject({ sm: 640, md: 768 });
+    expect(out).toEqual({ sm: 640, md: 768 });
   });
 
   it('returns a new frozen object and does not mutate the input', () => {
