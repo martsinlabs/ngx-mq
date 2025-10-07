@@ -11,7 +11,7 @@
     "clean": "rimraf dist"
   },
   "keywords": [],
-  "license": "ISC",
+  "license": "MIT",
   "sideEffects": false,
   "author": "Myroslav Martsin",
   "workspaces": ["demo"],
