@@ -5,23 +5,24 @@
 <mat-list role="list">
   <mat-list-item>
     <b>
-      up('sm'): <span class="mq-result">{{ isSmallAndUp() }}</span>
+      Is Mobile: <span class="mq-result">{{ isMobile() }}</span>
     </b>
-    - Viewport width ≥ {{ breakpoints['sm'] }}px
+    - Viewport width < {{ breakpoints["md"] }}px
   </mat-list-item>
 
   <mat-list-item>
     <b>
-      down("md"): <span class="mq-result">{{ isBelowMedium() }}</span>
+      Is Tablet: <span class="mq-result">{{ isTablet() }}</span>
     </b>
-    - Viewport width < {{ breakpoints['md'] }}px
+    - Viewport width between {{ breakpoints["md"] }}px and
+    {{ breakpoints["lg"] }}px
   </mat-list-item>
 
   <mat-list-item>
     <b>
-      between('sm', 'lg'): <span class="mq-result">{{ isBetweenSmallAndLarge() }}</span>
+      Is Desktop: <span class="mq-result">{{ isDesktop() }}</span>
     </b>
-    - Viewport width between {{ breakpoints['sm'] }}px and {{ breakpoints['lg'] }}px
+    - Viewport width >= {{ breakpoints["lg"] }}px
   </mat-list-item>
 
   <mat-list-item>
