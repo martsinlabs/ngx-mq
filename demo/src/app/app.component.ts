@@ -5,17 +5,17 @@ import { CommonModule } from '@angular/common';
 import { MqBreakpoints } from 'ngx-mq';
 
 @Component({
-    selector: 'app-root',
-    imports: [CommonModule, MatListModule],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+  selector: 'app-root',
+  imports: [CommonModule, MatListModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  isSmallAndUp: Signal<boolean> = up('sm');
+  isMobile: Signal<boolean> = down('md');
 
-  isBelowMedium: Signal<boolean> = down('md');
+  isTablet: Signal<boolean> = between('md', 'lg');
 
-  isBetweenSmallAndLarge: Signal<boolean> = between('sm', 'lg');
+  isDesktop: Signal<boolean> = up('lg');
 
   canHover: Signal<boolean> = matchMediaSignal('(hover: hover)');
 
