@@ -10,10 +10,18 @@
     "format": "prettier --write .",
     "clean": "rimraf dist"
   },
-  "keywords": [],
+  "keywords": [
+    "angular",
+    "signals",
+    "matchMedia",
+    "media-query",
+    "breakpoints",
+    "media-observer",
+    "responsive"
+  ],
+  "license": "MIT",
   "sideEffects": false,
   "author": "Myroslav Martsin",
-  "license": "ISC",
   "workspaces": ["demo"],
   "peerDependencies": {
     "@angular/common": ">=19 <21",
