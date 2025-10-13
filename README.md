@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/martsinlabs/ngx-mq/refs/heads/master/assets/logo.svg" width="160" alt="ngx-mq logo" />
+  <img src="https://raw.githubusercontent.com/martsinlabs/ngx-mq/refs/heads/main/assets/logo.svg" width="160" alt="ngx-mq logo" />
 </p>
 
 <h3 align="center">
