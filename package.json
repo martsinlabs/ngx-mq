@@ -1,7 +1,7 @@
 {
   "name": "ngx-mq",
   "version": "2.0.0",
-  "description": "",
+  "description": "Signal-powered breakpoints and media queries for Angular.",
   "main": "index.js",
   "scripts": {
     "test": "jest",
