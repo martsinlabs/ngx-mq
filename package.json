@@ -1,7 +1,7 @@
 {
   "name": "ngx-mq",
   "version": "1.0.0",
-  "description": "",
+  "description": "Signal-powered breakpoints and media queries for Angular.",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -22,7 +22,9 @@
   "license": "MIT",
   "sideEffects": false,
   "author": "Myroslav Martsin",
-  "workspaces": ["demo"],
+  "workspaces": [
+    "demo"
+  ],
   "peerDependencies": {
     "@angular/core": ">=16 <19",
     "@angular/common": ">=16 <19"
