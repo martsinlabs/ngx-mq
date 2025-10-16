@@ -1,34 +1,78 @@
-import { retain, release } from './mql-registry';
-import { MqRetainRef } from './mql-registry.models';
+import { DestroyRef, Injector, Signal } from '@angular/core';
+import { retain, release, MqRetainToken } from '../mql-registry';
+import { _getRegistry, _resetRegistry } from './mql-registry';
+import { MqlRegistry } from './mql-registry.models';
 
-describe('MqlRegistry', () => {
-  const query: string = '(min-width: 768px)';
+const createToken = (): MqRetainToken => Injector.create({ providers: [] }).get(DestroyRef);
 
-  it('should create a new signal and token when retain is called', () => {
-    const ref: MqRetainRef = retain(query);
+const query = '(min-width: 768px)';
 
-    expect(ref.signal()).toBe(false);
-    expect(typeof ref.token).toBe('symbol');
+describe('MQL Registry', () => {
+  beforeEach(() => _resetRegistry());
 
-    expect(() => release(query, ref.token)).not.toThrow();
+  describe('retain()', () => {
+    it('should return a static signal when matchMedia is not available', () => {
+      const token: MqRetainToken = createToken();
+      const original: typeof globalThis.matchMedia = globalThis.matchMedia;
+      Object.defineProperty(globalThis, 'matchMedia', { value: undefined });
+
+      const signal: Signal<boolean> = retain(query, token);
+
+      expect(typeof signal).toBe('function');
+      expect(_getRegistry().size).toBe(0);
+
+      Object.defineProperty(globalThis, 'matchMedia', { writable: true, value: original });
+    });
+
+    it('should return boolean signal and add query to registry', () => {
+      const token: MqRetainToken = createToken();
+
+      const signal: Signal<boolean> = retain(query, token);
+
+      expect(typeof signal()).toBe('boolean');
+      expect(_getRegistry().has(query)).toBe(true);
+    });
+
+    it('should reuse existing signal when called multiple times for same query', () => {
+      const registry: MqlRegistry = _getRegistry();
+
+      const signal1: Signal<boolean> = retain(query, createToken());
+      const signal2: Signal<boolean> = retain(query, createToken());
+
+      expect(signal1).toBe(signal2);
+      expect(registry.size).toBe(1);
+    });
   });
 
-  it('should return the same signal when retain is called multiple times for the same query', () => {
-    const ref1: MqRetainRef = retain(query);
-    const ref2: MqRetainRef = retain(query);
+  describe('release()', () => {
+    it('should remove query from registry and return true when released', () => {
+      const token: MqRetainToken = createToken();
 
-    expect(ref1.signal).toBe(ref2.signal);
-    expect(ref1.token).not.toBe(ref2.token);
+      retain(query, token);
+      const released: boolean = release(query, token);
 
-    release(query, ref1.token);
-    release(query, ref2.token);
-  });
+      expect(released).toBe(true);
+      expect(_getRegistry().has(query)).toBe(false);
+    });
 
-  it('should safely ignore release with an unknown token', () => {
-    const ref: MqRetainRef = retain(query);
+    it('should return false when releasing non-existing query', () => {
+      const token: MqRetainToken = createToken();
 
-    expect(() => release(query, Symbol('fake-token'))).not.toThrow();
+      const result: boolean = release(query, token);
 
-    release(query, ref.token);
+      expect(result).toBe(false);
+    });
+
+    it('should only remove one token when multiple retainers exist', () => {
+      const token1: MqRetainToken = createToken();
+      const token2: MqRetainToken = createToken();
+
+      retain(query, token1);
+      retain(query, token2);
+      const released: boolean = release(query, token1);
+
+      expect(released).toBe(true);
+      expect(_getRegistry().has(query)).toBe(true);
+    });
   });
 });
