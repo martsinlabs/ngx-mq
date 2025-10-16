@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main, 1.x.x, 2.x.x]
+  pull_request:
+    branches: [main, 1.x.x, 2.x.x]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ github.ref_name == '1.x.x' && '20' || '22' }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies for branch: ${{ github.ref_name }}"
+          npm ci
+
+      - name: Run tests
+        run: npm run test:coverage
+
+      - name: Build
+        run: |
+          echo "Building for branch: ${{ github.ref_name }}"
+          npm run build
+
+      # --- Upload coverage only for main branch ---
+      - name: Upload coverage reports to Codecov
+        if: github.ref_name == 'main'
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

@@ -1,6 +1,6 @@
 {
   "name": "ngx-mq",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Signal-powered breakpoints and media queries for Angular.",
   "repository": {
     "type": "git",
@@ -10,6 +10,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "build": "ng-packagr -p ng-package.json",
     "build:watch": "ng-packagr -w -p ng-package.json",
     "format": "prettier --write .",
