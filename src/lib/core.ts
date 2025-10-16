@@ -1,10 +1,10 @@
 import { computed, Signal } from '@angular/core';
-import { MqRetainRef, retainUntilDestroy } from './mql-registry';
+import { retainUntilDestroy } from './mql-registry';
 
 export function createConsumer(query: string): Signal<boolean> {
-  const retainRef: MqRetainRef = retainUntilDestroy(query);
+  const querySignal: Signal<boolean> = retainUntilDestroy(query);
 
-  return computed(() => retainRef.signal());
+  return computed(() => querySignal());
 }
 
 export function createConsumerLabel(descriptor: string): string {

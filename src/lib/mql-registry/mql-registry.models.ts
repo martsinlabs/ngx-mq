@@ -1,11 +1,6 @@
-import { Signal, WritableSignal } from '@angular/core';
+import { DestroyRef, WritableSignal } from '@angular/core';
 
-export type MqRetainToken = symbol;
-
-export interface MqRetainRef {
-  signal: Signal<boolean>;
-  token: MqRetainToken;
-}
+export type MqRetainToken = DestroyRef;
 
 export interface MqHandle {
   mql: MediaQueryList;
