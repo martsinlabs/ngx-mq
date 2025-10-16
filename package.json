@@ -10,6 +10,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "build": "ng-packagr -p ng-package.json",
     "build:watch": "ng-packagr -w -p ng-package.json",
     "format": "prettier --write .",
