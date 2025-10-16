@@ -1,6 +1,6 @@
-import { signal as createSignal, WritableSignal } from '@angular/core';
+import { signal as createSignal, Signal, WritableSignal } from '@angular/core';
 import { addChangeListenerToMql, removeChangeListenerFromMql } from './mql-registry.listeners';
-import { MqlRegistry, MqRetainToken, MqHandle, MqRetainRef } from './mql-registry.models';
+import { MqlRegistry, MqRetainToken, MqHandle } from './mql-registry.models';
 
 const REGISTRY_KEY: symbol = Symbol.for('ngx-mq:mql-registry');
 
@@ -9,8 +9,6 @@ const getRegistry = (): MqlRegistry => {
 
   return (realmGlobal[REGISTRY_KEY] ??= new Map()) as MqlRegistry;
 };
-
-const createRetainToken = (query: string): MqRetainToken => Symbol(`mq-retainer:${query}`);
 
 const createMqHandle = (query: string): MqHandle => {
   const mql: MediaQueryList = matchMedia(query);
@@ -23,12 +21,10 @@ const createMqHandle = (query: string): MqHandle => {
   return { mql, signal, onChange, retainers: new Set() };
 };
 
-export function retain(query: string): MqRetainRef {
-  const token: MqRetainToken = createRetainToken(query);
-
+export function retain(query: string, token: MqRetainToken): Signal<boolean> {
   // SSR-safe fallback
   if (typeof globalThis.matchMedia !== 'function') {
-    return { signal: createSignal(false).asReadonly(), token };
+    return createSignal(false).asReadonly();
   }
 
   const registry: MqlRegistry = getRegistry();
@@ -42,7 +38,7 @@ export function retain(query: string): MqRetainRef {
 
   handle.retainers.add(token);
 
-  return { signal: handle.signal.asReadonly(), token };
+  return handle.signal.asReadonly();
 }
 
 export function release(query: string, token: MqRetainToken): boolean {
@@ -60,4 +56,24 @@ export function release(query: string, token: MqRetainToken): boolean {
   }
 
   return removed;
+}
+
+/* @internal
+ * Returns the current registry (used only in tests).
+ */
+export function _getRegistry(): MqlRegistry {
+  return getRegistry();
+}
+
+/* @internal
+ * Clears all registry entries and removes media-query listeners.
+ */
+export function _resetRegistry(): void {
+  const registry: MqlRegistry = getRegistry();
+
+  registry.forEach((handle: MqHandle) => {
+    removeChangeListenerFromMql(handle.mql, handle.onChange);
+  });
+
+  registry.clear();
 }
