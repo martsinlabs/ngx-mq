@@ -6,17 +6,29 @@
   Signal-Powered Breakpoints & Media Queries
 </h3>
 
-<p align="center">
+<h5 align="center">
+  <a href="https://github.com/martsinlabs/ngx-mq/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/martsinlabs/ngx-mq/ci.yml?branch=main&label=CI&color=44cc11&logo=github" alt="CI Status" />
+  </a>
+
+  <a href="https://codecov.io/gh/martsinlabs/ngx-mq">
+    <img src="https://codecov.io/gh/martsinlabs/ngx-mq/branch/main/graph/badge.svg" alt="coverage" />
+  </a>
+
+  <br>
+
   <a href="https://www.npmjs.com/package/ngx-mq">
-    <img src="https://img.shields.io/npm/v/ngx-mq.svg?color=#1f883d" alt="npm version" />
+    <img src="https://img.shields.io/npm/v/ngx-mq.svg?color=007ec6" alt="npm version" />
   </a>
   <a href="https://www.npmjs.com/package/ngx-mq">
-    <img src="https://img.shields.io/npm/dm/ngx-mq.svg?color=#1f883d" alt="npm downloads" />
+    <img src="https://img.shields.io/npm/dm/ngx-mq.svg?color=44cc11" alt="npm downloads" />
   </a>
   <a href="https://opensource.org/license/MIT">
-    <img src="https://img.shields.io/npm/l/ngx-mq.svg?color=#1f883d" alt="license" />
+    <img src="https://img.shields.io/npm/l/ngx-mq.svg?color=44cc11" alt="license" />
   </a>
-</p>
+</h5>
+
+<br>
 
 ## Introduction
 
