@@ -25,6 +25,11 @@ jobs:
           echo "Installing dependencies for branch: ${{ github.ref_name }}"
           npm ci
 
+      - name: Run ESLint
+        run: |
+          echo "Running ESLint..."
+          npm run lint
+
       - name: Run tests
         run: npm run test:coverage
 
