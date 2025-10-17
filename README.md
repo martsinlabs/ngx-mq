@@ -6,7 +6,7 @@
   Signal-Powered Breakpoints & Media Queries
 </h3>
 
-<p align="center">
+<h5 align="center">
   <a href="https://github.com/martsinlabs/ngx-mq/actions/workflows/ci.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/martsinlabs/ngx-mq/ci.yml?branch=main&label=CI&color=44cc11&logo=github" alt="CI Status" />
   </a>
@@ -26,7 +26,9 @@
   <a href="https://opensource.org/license/MIT">
     <img src="https://img.shields.io/npm/l/ngx-mq.svg?color=44cc11" alt="license" />
   </a>
-</p>
+</h5>
+
+<br>
 
 ## Introduction
 
