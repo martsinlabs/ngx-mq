@@ -58,6 +58,18 @@ describe('normalizeBreakpoints()', () => {
     expect(out.sm).toBeCloseTo(639.5);
     expect(out.md).toBeCloseTo(768.25);
   });
+
+  it('should throw when value is not finite', () => {
+    const input = { sm: Infinity };
+
+    expect(() => normalizeBreakpoints(input)).toThrow();
+  });
+
+  it('should throw when value is less or equal to 0', () => {
+    const input = { md: 0 };
+
+    expect(() => normalizeBreakpoints(input)).toThrow();
+  });
 });
 
 describe('validateEpsilon()', () => {
