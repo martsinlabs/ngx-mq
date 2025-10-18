@@ -30,6 +30,14 @@
 
 <br>
 
+## Features
+
+- Lightweight
+- SSR-safe
+- Auto-cleanup
+- Angular 16 — next
+- Well-tested
+
 ## Introduction
 
 Built on the native [matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) API, NGX-MQ brings a signal-based and declarative way to handle breakpoints and media queries in Angular. Lifecycle management is fully automated via `DestroyRef`, removing the need for manual cleanup. Under the hood, it leverages the Multiton and Flyweight patterns for efficient instance reuse and consistent behavior across your app.
