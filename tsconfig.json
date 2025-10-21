@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "stripInternal": true,
     "allowSyntheticDefaultImports": true,
-    "useDefineForClassFields": false,
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "compilationMode": "partial"
