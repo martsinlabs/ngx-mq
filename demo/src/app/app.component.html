@@ -26,6 +26,13 @@
 
   <mat-list-item>
     <b>
+      Is Landscape: <span class="mq-result">{{ isLandscape() }}</span>
+    </b>
+    - Screen orientation: landscape
+  </mat-list-item>
+
+  <mat-list-item>
+    <b>
       matchMediaSignal('(hover: hover)'): <span class="mq-result">{{ canHover() }}</span>
     </b>
     - Can hover
