@@ -38,6 +38,17 @@ export function between(minBp: string, maxBp: string): Signal<boolean> {
   return consumer;
 }
 
+export function orientation(option: 'portrait' | 'landscape'): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(orientation);
+
+  const query: string = normalizeQuery(`(orientation: ${option})`);
+  const consumer: Signal<boolean> = createConsumer(query);
+
+  consumer.toString = () => createConsumerLabel(`orientation(${option})`);
+
+  return consumer;
+}
+
 export function matchMediaSignal(query: string): Signal<boolean> {
   isDevMode() && assertInInjectionContext(matchMediaSignal);
 

@@ -10,13 +10,10 @@
   <a href="https://github.com/martsinlabs/ngx-mq/actions/workflows/ci.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/martsinlabs/ngx-mq/ci.yml?branch=main&label=CI&color=44cc11&logo=github" alt="CI Status" />
   </a>
-
   <a href="https://codecov.io/gh/martsinlabs/ngx-mq">
     <img src="https://codecov.io/gh/martsinlabs/ngx-mq/branch/main/graph/badge.svg" alt="coverage" />
   </a>
-
   <br>
-
   <a href="https://www.npmjs.com/package/ngx-mq">
     <img src="https://img.shields.io/npm/v/ngx-mq.svg?color=007ec6" alt="npm version" />
   </a>
@@ -124,6 +121,14 @@ export const isMobile = (): Signal<boolean> => down('md');
 export const isTablet = (): Signal<boolean> => between('md', 'lg');
 export const isDesktop = (): Signal<boolean> => up('lg');
 ```
+
+## Common utilities
+
+Utils exposing common CSS media features.
+
+| Function      | Parameters                          | Returns           | Description                                                              |
+| ------------- | ----------------------------------- | ----------------- | ------------------------------------------------------------------------ |
+| `orientation` | `option: 'portrait' \| 'landscape'` | `Signal<boolean>` | `true` when the current screen orientation matches the specified option. |
 
 ---
 
