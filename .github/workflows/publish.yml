@@ -3,7 +3,7 @@ name: Publish Package
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v2.*.*'
 
 permissions:
   id-token: write
@@ -17,14 +17,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Set up Node environment
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ github.ref_name == '1.x.x' && '20' || '22' }}
-          registry-url: https://registry.npmjs.org/
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - run: npm install -g npm@latest
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build

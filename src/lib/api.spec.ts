@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Signal, isSignal } from '@angular/core';
 import { provideBreakpoints } from './providers';
-import { up, down, between, matchMediaSignal } from './api';
+import { up, down, between, matchMediaSignal, orientation } from './api';
 
 describe('Public API', () => {
   beforeEach(() => {
@@ -37,6 +37,16 @@ describe('Public API', () => {
       expect(isSignal(signal)).toBe(true);
       expect(typeof signal()).toBe('boolean');
       expect(signal.toString()).toContain('between');
+    });
+  });
+
+  describe('orientation()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => orientation('portrait'));
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('orientation');
     });
   });
 
