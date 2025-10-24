@@ -37,10 +37,3 @@ jobs:
         run: |
           echo "Building for branch: ${{ github.ref_name }}"
           npm run build
-
-      # --- Upload coverage only for main branch ---
-      - name: Upload coverage reports to Codecov
-        if: github.ref_name == 'main'
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
