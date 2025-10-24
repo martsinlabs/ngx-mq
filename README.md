@@ -149,3 +149,7 @@ import { matchMediaSignal } from 'ngx-mq';
 // Example: track orientation changes
 export const isLandscape = (): Signal<boolean> => matchMediaSignal('(orientation: landscape)');
 ```
+
+## Contributing
+
+[CONTRIBUTING.md](https://github.com/martsinlabs/ngx-mq/blob/main/CONTRIBUTING.md)
