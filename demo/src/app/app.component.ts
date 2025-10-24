@@ -1,4 +1,4 @@
-import { between, down, matchMediaSignal, MQ_BREAKPOINTS, orientation, up } from 'ngx-mq';
+import { between, colorScheme, down, matchMediaSignal, MQ_BREAKPOINTS, orientation, up } from 'ngx-mq';
 import { Component, Inject, Signal } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
@@ -19,6 +19,8 @@ export class AppComponent {
   isDesktop: Signal<boolean> = up('lg');
 
   isLandscape: Signal<boolean> = orientation('landscape');
+
+  isDarkMode: Signal<boolean> = colorScheme('dark');
 
   canHover: Signal<boolean> = matchMediaSignal('(hover: hover)');
 
