@@ -160,3 +160,7 @@ export interface CreateMediaQueryOptions {
   debugName?: string;
 }
 ```
+
+## Contributing
+
+[CONTRIBUTING.md](https://github.com/martsinlabs/ngx-mq/blob/main/CONTRIBUTING.md)
