@@ -33,6 +33,13 @@
 
   <mat-list-item>
     <b>
+      Color scheme (dark): <span class="mq-result">{{ isDarkMode() }}</span>
+    </b>
+    - Dark mode preferred
+  </mat-list-item>
+
+  <mat-list-item>
+    <b>
       matchMediaSignal('(hover: hover)'): <span class="mq-result">{{ canHover() }}</span>
     </b>
     - Can hover

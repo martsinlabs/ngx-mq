@@ -50,6 +50,17 @@ export function orientation(option: 'portrait' | 'landscape', options?: CreateMe
   return consumer;
 }
 
+export function colorScheme(option: 'light' | 'dark', options?: CreateMediaQueryOptions): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(colorScheme);
+
+  const query: string = normalizeQuery(`(prefers-color-scheme: ${option})`);
+  const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
+
+  consumer.toString = () => createConsumerLabel(`colorScheme(${option})`);
+
+  return consumer;
+}
+
 export function matchMediaSignal(query: string, options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(matchMediaSignal);
 

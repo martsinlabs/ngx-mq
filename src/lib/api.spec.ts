@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Signal, isSignal } from '@angular/core';
 import { provideBreakpoints } from './providers';
-import { up, down, between, matchMediaSignal, orientation } from './api';
+import { up, down, between, matchMediaSignal, orientation, colorScheme } from './api';
 
 describe('Public API', () => {
   beforeEach(() => {
@@ -47,6 +47,16 @@ describe('Public API', () => {
       expect(isSignal(signal)).toBe(true);
       expect(typeof signal()).toBe('boolean');
       expect(signal.toString()).toContain('orientation');
+    });
+  });
+
+  describe('colorScheme()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => colorScheme('dark'));
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('colorScheme');
     });
   });
 
