@@ -8,8 +8,13 @@ Please review the guidelines below to ensure your contributions align with the p
 
 Follow the steps below to set up the project locally.
 
+> 💡 **Tip:**
+> If you're contributing for the first time, please **fork the repository** before cloning it.
+> This ensures you can push your changes to your own fork and open a Pull Request later.
+
 ```bash
-git clone https://github.com/martsinlabs/ngx-mq.git
+# clone your fork
+git clone https://github.com/<username>/ngx-mq.git
 cd ngx-mq
 npm install
 npm run build:watch
@@ -51,11 +56,8 @@ Consistent code style helps keep the project readable and easy to maintain.
 Run the linters before committing any changes.
 
 ```bash
-npm run format
 npm run lint
 ```
-
-Make sure your code passes all lint checks before opening a pull request.
 
 ## Testing
 
@@ -70,6 +72,21 @@ Aim to keep test coverage high and meaningful.
 
 ## Pull Requests
 
+> **Important:**  
+> Do **not** open pull requests directly to the `main` branch.  
+> The `main` branch represents the upcoming development baseline and may contain unreleased or experimental changes.
+
+Each published version of **ngx-mq** has its own **release branch**:
+
+- `1.x.x` → for Angular 16 – 18 compatible releases
+- `2.x.x` → for Angular 19 – 20 compatible releases
+- _(future majors will follow the same pattern)_
+
+When submitting a PR:
+
+1. Identify which Angular version your change applies to.
+2. Open your PR against the corresponding branch (`1.x.x`, `2.x.x`, etc.).
+3. Use `main` only if your contribution targets upcoming major features.
+
 Keep pull requests clear and focused. <br>
-Follow the provided template and include a concise description of your changes. <br>
-Ensure your branch is up to date before opening.
+Follow the provided template and include a concise description of your changes.
