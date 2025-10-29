@@ -129,6 +129,7 @@ Utils exposing common CSS media features.
 | Function      | Parameters                                                             | Returns           | Description                                                              |
 | ------------- | ---------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------ |
 | `orientation` | `option: 'portrait' \| 'landscape', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the current screen orientation matches the specified option. |
+| `colorScheme` | `option: 'light' \| 'dark', options?: CreateMediaQueryOptions`         | `Signal<boolean>` | `true` when the system color scheme matches the specified option.        |
 
 ---
 
