@@ -6,3 +6,11 @@ export interface CreateMediaQueryOptions {
    */
   debugName?: string;
 }
+
+export type DisplayModeOption =
+  | 'browser'
+  | 'fullscreen'
+  | 'standalone'
+  | 'minimal-ui'
+  | 'window-controls-overlay'
+  | 'picture-in-picture';

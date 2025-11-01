@@ -1,8 +1,8 @@
 import { assertInInjectionContext, isDevMode, Signal } from '@angular/core';
 import { applyMaxEpsilon, resolveBreakpoint } from './utils/breakpoints.utils';
+import { CreateMediaQueryOptions, DisplayModeOption } from './models';
 import { createConsumer, createConsumerLabel } from './core';
 import { normalizeQuery } from './utils/common.utils';
-import { CreateMediaQueryOptions } from './models';
 
 export function up(bp: string, options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(up);
@@ -57,6 +57,17 @@ export function colorScheme(option: 'light' | 'dark', options?: CreateMediaQuery
   const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
 
   consumer.toString = () => createConsumerLabel(`colorScheme(${option})`);
+
+  return consumer;
+}
+
+export function displayMode(option: DisplayModeOption, options?: CreateMediaQueryOptions): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(displayMode);
+
+  const query = normalizeQuery(`(display-mode: ${option})`);
+  const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
+
+  consumer.toString = () => createConsumerLabel(`displayMode(${option})`);
 
   return consumer;
 }

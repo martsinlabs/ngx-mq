@@ -130,6 +130,7 @@ Utils exposing common CSS media features.
 | ------------- | ---------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------ |
 | `orientation` | `option: 'portrait' \| 'landscape', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the current screen orientation matches the specified option. |
 | `colorScheme` | `option: 'light' \| 'dark', options?: CreateMediaQueryOptions`         | `Signal<boolean>` | `true` when the system color scheme matches the specified option.        |
+| `displayMode` | `option: DisplayModeOption, options?: CreateMediaQueryOptions`         | `Signal<boolean>` | `true` when the current display mode matches the specified option.       |
 
 ---
 
@@ -160,6 +161,14 @@ export interface CreateMediaQueryOptions {
    */
   debugName?: string;
 }
+
+export type DisplayModeOption =
+  | 'browser'
+  | 'fullscreen'
+  | 'standalone'
+  | 'minimal-ui'
+  | 'window-controls-overlay'
+  | 'picture-in-picture';
 ```
 
 ## Contributing
