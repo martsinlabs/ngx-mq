@@ -130,6 +130,7 @@ Utils exposing common CSS media features.
 | ------------- | ----------------------------------- | ----------------- | ------------------------------------------------------------------------ |
 | `orientation` | `option: 'portrait' \| 'landscape'` | `Signal<boolean>` | `true` when the current screen orientation matches the specified option. |
 | `colorScheme` | `option: 'light' \| 'dark'`         | `Signal<boolean>` | `true` when the system color scheme matches the specified option.        |
+| `displayMode` | `option: DisplayModeOption`         | `Signal<boolean>` | `true` when the current display mode matches the specified option.       |
 
 ---
 
@@ -149,6 +150,18 @@ import { matchMediaSignal } from 'ngx-mq';
 
 // Example: track orientation changes
 export const isLandscape = (): Signal<boolean> => matchMediaSignal('(orientation: landscape)');
+```
+
+## Types
+
+```ts
+export type DisplayModeOption =
+  | 'browser'
+  | 'fullscreen'
+  | 'standalone'
+  | 'minimal-ui'
+  | 'window-controls-overlay'
+  | 'picture-in-picture';
 ```
 
 ## Contributing
