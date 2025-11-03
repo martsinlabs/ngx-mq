@@ -39,35 +39,35 @@ export function between(minBp: string, maxBp: string, options?: CreateMediaQuery
   return consumer;
 }
 
-export function orientation(option: 'portrait' | 'landscape', options?: CreateMediaQueryOptions): Signal<boolean> {
+export function orientation(value: 'portrait' | 'landscape', options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(orientation);
 
-  const query: string = normalizeQuery(`(orientation: ${option})`);
+  const query: string = normalizeQuery(`(orientation: ${value})`);
   const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
 
-  consumer.toString = () => createConsumerLabel(`orientation(${option})`);
+  consumer.toString = () => createConsumerLabel(`orientation(${value})`);
 
   return consumer;
 }
 
-export function colorScheme(option: 'light' | 'dark', options?: CreateMediaQueryOptions): Signal<boolean> {
+export function colorScheme(value: 'light' | 'dark', options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(colorScheme);
 
-  const query: string = normalizeQuery(`(prefers-color-scheme: ${option})`);
+  const query: string = normalizeQuery(`(prefers-color-scheme: ${value})`);
   const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
 
-  consumer.toString = () => createConsumerLabel(`colorScheme(${option})`);
+  consumer.toString = () => createConsumerLabel(`colorScheme(${value})`);
 
   return consumer;
 }
 
-export function displayMode(option: DisplayModeOption, options?: CreateMediaQueryOptions): Signal<boolean> {
+export function displayMode(value: DisplayModeOption, options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(displayMode);
 
-  const query = normalizeQuery(`(display-mode: ${option})`);
+  const query = normalizeQuery(`(display-mode: ${value})`);
   const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
 
-  consumer.toString = () => createConsumerLabel(`displayMode(${option})`);
+  consumer.toString = () => createConsumerLabel(`displayMode(${value})`);
 
   return consumer;
 }
