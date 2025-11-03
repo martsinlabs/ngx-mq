@@ -39,35 +39,35 @@ export function between(minBp: string, maxBp: string): Signal<boolean> {
   return consumer;
 }
 
-export function orientation(option: 'portrait' | 'landscape'): Signal<boolean> {
+export function orientation(value: 'portrait' | 'landscape'): Signal<boolean> {
   isDevMode() && assertInInjectionContext(orientation);
 
-  const query: string = normalizeQuery(`(orientation: ${option})`);
+  const query: string = normalizeQuery(`(orientation: ${value})`);
   const consumer: Signal<boolean> = createConsumer(query);
 
-  consumer.toString = () => createConsumerLabel(`orientation(${option})`);
+  consumer.toString = () => createConsumerLabel(`orientation(${value})`);
 
   return consumer;
 }
 
-export function colorScheme(option: 'light' | 'dark'): Signal<boolean> {
+export function colorScheme(value: 'light' | 'dark'): Signal<boolean> {
   isDevMode() && assertInInjectionContext(colorScheme);
 
-  const query: string = normalizeQuery(`(prefers-color-scheme: ${option})`);
+  const query: string = normalizeQuery(`(prefers-color-scheme: ${value})`);
   const consumer: Signal<boolean> = createConsumer(query);
 
-  consumer.toString = () => createConsumerLabel(`colorScheme(${option})`);
+  consumer.toString = () => createConsumerLabel(`colorScheme(${value})`);
 
   return consumer;
 }
 
-export function displayMode(option: DisplayModeOption): Signal<boolean> {
+export function displayMode(value: DisplayModeOption): Signal<boolean> {
   isDevMode() && assertInInjectionContext(displayMode);
 
-  const query = normalizeQuery(`(display-mode: ${option})`);
+  const query = normalizeQuery(`(display-mode: ${value})`);
   const consumer: Signal<boolean> = createConsumer(query);
 
-  consumer.toString = () => createConsumerLabel(`displayMode(${option})`);
+  consumer.toString = () => createConsumerLabel(`displayMode(${value})`);
 
   return consumer;
 }

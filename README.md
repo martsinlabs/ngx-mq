@@ -128,9 +128,9 @@ Utils exposing common CSS media features.
 
 | Function      | Parameters                          | Returns           | Description                                                              |
 | ------------- | ----------------------------------- | ----------------- | ------------------------------------------------------------------------ |
-| `orientation` | `option: 'portrait' \| 'landscape'` | `Signal<boolean>` | `true` when the current screen orientation matches the specified option. |
-| `colorScheme` | `option: 'light' \| 'dark'`         | `Signal<boolean>` | `true` when the system color scheme matches the specified option.        |
-| `displayMode` | `option: DisplayModeOption`         | `Signal<boolean>` | `true` when the current display mode matches the specified option.       |
+| `orientation` | `value: 'portrait' \| 'landscape'` | `Signal<boolean>` | `true` when the current screen orientation matches the specified value. |
+| `colorScheme` | `value: 'light' \| 'dark'`         | `Signal<boolean>` | `true` when the system color scheme matches the specified value.        |
+| `displayMode` | `value: DisplayModeOption`         | `Signal<boolean>` | `true` when the current display mode matches the specified value.       |
 
 ---
 
