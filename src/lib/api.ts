@@ -1,8 +1,8 @@
 import { assertInInjectionContext, isDevMode, Signal } from '@angular/core';
 import { applyMaxEpsilon, resolveBreakpoint } from './utils/breakpoints.utils';
+import { CreateMediaQueryOptions, DisplayModeOption } from './models';
 import { createConsumer, createConsumerLabel } from './core';
 import { normalizeQuery } from './utils/common.utils';
-import { CreateMediaQueryOptions } from './models';
 
 export function up(bp: string, options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(up);
@@ -39,24 +39,46 @@ export function between(minBp: string, maxBp: string, options?: CreateMediaQuery
   return consumer;
 }
 
-export function orientation(option: 'portrait' | 'landscape', options?: CreateMediaQueryOptions): Signal<boolean> {
+export function orientation(value: 'portrait' | 'landscape', options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(orientation);
 
-  const query: string = normalizeQuery(`(orientation: ${option})`);
+  const query: string = normalizeQuery(`(orientation: ${value})`);
   const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
 
-  consumer.toString = () => createConsumerLabel(`orientation(${option})`);
+  consumer.toString = () => createConsumerLabel(`orientation(${value})`);
 
   return consumer;
 }
 
-export function colorScheme(option: 'light' | 'dark', options?: CreateMediaQueryOptions): Signal<boolean> {
+export function colorScheme(value: 'light' | 'dark', options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(colorScheme);
 
-  const query: string = normalizeQuery(`(prefers-color-scheme: ${option})`);
+  const query: string = normalizeQuery(`(prefers-color-scheme: ${value})`);
   const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
 
-  consumer.toString = () => createConsumerLabel(`colorScheme(${option})`);
+  consumer.toString = () => createConsumerLabel(`colorScheme(${value})`);
+
+  return consumer;
+}
+
+export function displayMode(value: DisplayModeOption, options?: CreateMediaQueryOptions): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(displayMode);
+
+  const query = normalizeQuery(`(display-mode: ${value})`);
+  const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
+
+  consumer.toString = () => createConsumerLabel(`displayMode(${value})`);
+
+  return consumer;
+}
+
+export function reducedMotion(options?: CreateMediaQueryOptions): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(reducedMotion);
+
+  const query: string = normalizeQuery('(prefers-reduced-motion: reduce)');
+  const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
+
+  consumer.toString = () => createConsumerLabel('reducedMotion');
 
   return consumer;
 }
