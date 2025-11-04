@@ -72,6 +72,17 @@ export function displayMode(value: DisplayModeOption, options?: CreateMediaQuery
   return consumer;
 }
 
+export function reducedMotion(options?: CreateMediaQueryOptions): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(reducedMotion);
+
+  const query: string = normalizeQuery('(prefers-reduced-motion: reduce)');
+  const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
+
+  consumer.toString = () => createConsumerLabel('reducedMotion');
+
+  return consumer;
+}
+
 export function matchMediaSignal(query: string, options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(matchMediaSignal);
 
