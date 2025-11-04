@@ -126,11 +126,12 @@ export const isDesktop = (): Signal<boolean> => up('lg');
 
 Utils exposing common CSS media features.
 
-| Function      | Parameters                                                             | Returns           | Description                                                              |
-| ------------- | ---------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------ |
-| `orientation` | `option: 'portrait' \| 'landscape', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the current screen orientation matches the specified option. |
-| `colorScheme` | `option: 'light' \| 'dark', options?: CreateMediaQueryOptions`         | `Signal<boolean>` | `true` when the system color scheme matches the specified option.        |
-| `displayMode` | `option: DisplayModeOption, options?: CreateMediaQueryOptions`         | `Signal<boolean>` | `true` when the current display mode matches the specified option.       |
+| Function        | Parameters                                                            | Returns           | Description                                                             |
+| --------------- | --------------------------------------------------------------------- | ----------------- | ----------------------------------------------------------------------- |
+| `orientation`   | `value: 'portrait' \| 'landscape', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the current screen orientation matches the specified value. |
+| `colorScheme`   | `value: 'light' \| 'dark', options?: CreateMediaQueryOptions`         | `Signal<boolean>` | `true` when the system color scheme matches the specified value.        |
+| `displayMode`   | `value: DisplayModeOption, options?: CreateMediaQueryOptions`         | `Signal<boolean>` | `true` when the current display mode matches the specified value.       |
+| `reducedMotion` | `options?: CreateMediaQueryOptions`                                   | `Signal<boolean>` | `true` when the user has enabled reduced motion.                        |
 
 ---
 
