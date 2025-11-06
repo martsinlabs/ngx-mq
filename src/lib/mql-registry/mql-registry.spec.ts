@@ -16,7 +16,7 @@ describe('MQL Registry', () => {
       const original: typeof globalThis.matchMedia = globalThis.matchMedia;
       Object.defineProperty(globalThis, 'matchMedia', { value: undefined });
 
-      const signal: Signal<boolean> = retain(query, token);
+      const signal: Signal<boolean> = retain(query, token, false);
 
       expect(typeof signal).toBe('function');
       expect(_getRegistry().size).toBe(0);
@@ -27,7 +27,7 @@ describe('MQL Registry', () => {
     it('should return boolean signal and add query to registry', () => {
       const token: MqRetainToken = createToken();
 
-      const signal: Signal<boolean> = retain(query, token);
+      const signal: Signal<boolean> = retain(query, token, false);
 
       expect(typeof signal()).toBe('boolean');
       expect(_getRegistry().has(query)).toBe(true);
@@ -36,8 +36,8 @@ describe('MQL Registry', () => {
     it('should reuse existing signal when called multiple times for same query', () => {
       const registry: MqlRegistry = _getRegistry();
 
-      const signal1: Signal<boolean> = retain(query, createToken());
-      const signal2: Signal<boolean> = retain(query, createToken());
+      const signal1: Signal<boolean> = retain(query, createToken(), false);
+      const signal2: Signal<boolean> = retain(query, createToken(), false);
 
       expect(signal1).toBe(signal2);
       expect(registry.size).toBe(1);
@@ -48,7 +48,7 @@ describe('MQL Registry', () => {
     it('should remove query from registry and return true when released', () => {
       const token: MqRetainToken = createToken();
 
-      retain(query, token);
+      retain(query, token, false);
       const released: boolean = release(query, token);
 
       expect(released).toBe(true);
@@ -67,8 +67,8 @@ describe('MQL Registry', () => {
       const token1: MqRetainToken = createToken();
       const token2: MqRetainToken = createToken();
 
-      retain(query, token1);
-      retain(query, token2);
+      retain(query, token1, false);
+      retain(query, token2, false);
       const released: boolean = release(query, token1);
 
       expect(released).toBe(true);
