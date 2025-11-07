@@ -8,3 +8,8 @@ export const MQ_BREAKPOINT_EPSILON: InjectionToken<number> = new InjectionToken(
   providedIn: 'root',
   factory: () => DEFAULT_BREAKPOINT_EPSILON,
 });
+
+export const NGX_MQ_SSR_VALUE: InjectionToken<boolean> = new InjectionToken('NGX_MQ_SSR_VALUE', {
+  providedIn: 'root',
+  factory: () => false,
+});

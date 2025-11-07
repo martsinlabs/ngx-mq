@@ -1,5 +1,12 @@
 export type MqBreakpoints = Record<string, number>;
 
+export interface CreateMediaQueryOptions {
+  /**
+   * Static signal value used during SSR.
+   */
+  ssrValue?: boolean;
+}
+
 export type DisplayModeOption =
   | 'browser'
   | 'fullscreen'
