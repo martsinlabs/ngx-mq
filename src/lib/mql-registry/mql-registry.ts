@@ -21,10 +21,10 @@ const createMqHandle = (query: string): MqHandle => {
   return { mql, signal, onChange, retainers: new Set() };
 };
 
-export function retain(query: string, token: MqRetainToken): Signal<boolean> {
-  // SSR-safe fallback
+export function retain(query: string, token: MqRetainToken, ssrValue: boolean): Signal<boolean> {
+  // SSR mode
   if (typeof globalThis.matchMedia !== 'function') {
-    return createSignal(false).asReadonly();
+    return createSignal(ssrValue).asReadonly();
   }
 
   const registry: MqlRegistry = getRegistry();

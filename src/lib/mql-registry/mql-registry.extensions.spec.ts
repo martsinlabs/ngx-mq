@@ -18,7 +18,7 @@ describe('retainUntilDestroy()', () => {
     const fixture = TestBed.createComponent(HostComponent);
     const injector = fixture.componentRef.injector;
 
-    runInInjectionContext(injector, () => retainUntilDestroy('(min-width: 768px)'));
+    runInInjectionContext(injector, () => retainUntilDestroy('(min-width: 768px)', false));
     fixture.destroy();
 
     expect(releaseSpy).toHaveBeenCalled();
