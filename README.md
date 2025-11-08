@@ -104,11 +104,11 @@ bootstrapApplication(AppComponent, {
 
 ### BP-related utilities
 
-| Function  | Parameters                     | Returns           | Description                                   |
-| --------- | ------------------------------ | ----------------- | --------------------------------------------- |
-| `up`      | `bp: string`                   | `Signal<boolean>` | `true` when viewport width ≥ breakpoint       |
-| `down`    | `bp: string`                   | `Signal<boolean>` | `true` when viewport width < breakpoint       |
-| `between` | `minBp: string, maxBp: string` | `Signal<boolean>` | `true` when viewport width is in range [a, b] |
+| Function  | Parameters                                                        | Returns           | Description                                   |
+| --------- | ----------------------------------------------------------------- | ----------------- | --------------------------------------------- |
+| `up`      | `bp: string, options?: CreateMediaQueryOptions`                   | `Signal<boolean>` | `true` when viewport width ≥ breakpoint       |
+| `down`    | `bp: string, options?: CreateMediaQueryOptions`                   | `Signal<boolean>` | `true` when viewport width < breakpoint       |
+| `between` | `minBp: string, maxBp: string, options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when viewport width is in range [a, b] |
 
 > **Tip:** Wrap these APIs into reusable helpers:
 
@@ -126,13 +126,13 @@ export const isDesktop = (): Signal<boolean> => up('lg');
 
 Utils exposing common CSS media features.
 
-| Function        | Parameters                         | Returns           | Description                                                             |
-| --------------- | ---------------------------------- | ----------------- | ----------------------------------------------------------------------- |
-| `orientation`   | `value: 'portrait' \| 'landscape'` | `Signal<boolean>` | `true` when the current screen orientation matches the specified value. |
-| `colorScheme`   | `value: 'light' \| 'dark'`         | `Signal<boolean>` | `true` when the system color scheme matches the specified value.        |
-| `displayMode`   | `value: DisplayModeOption`         | `Signal<boolean>` | `true` when the current display mode matches the specified value.       |
-| `reducedMotion` | none                               | `Signal<boolean>` | `true` when the user has enabled reduced motion.                        |
-| `hover`         | none                               | `Signal<boolean>` | `true` when the user's primary input device supports hover capability.  |
+| Function        | Parameters                          | Returns           | Description                                                             |
+| --------------- | ----------------------------------- | ----------------- | ----------------------------------------------------------------------- |
+| `orientation`   | `value: 'portrait' \| 'landscape'`  | `Signal<boolean>` | `true` when the current screen orientation matches the specified value. |
+| `colorScheme`   | `value: 'light' \| 'dark'`          | `Signal<boolean>` | `true` when the system color scheme matches the specified value.        |
+| `displayMode`   | `value: DisplayModeOption`          | `Signal<boolean>` | `true` when the current display mode matches the specified value.       |
+| `reducedMotion` | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user has enabled reduced motion.                        |
+| `hover`         | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user's primary input device supports hover capability.  |
 
 ---
 
@@ -140,9 +140,9 @@ Utils exposing common CSS media features.
 
 Works with any valid [CSS media query](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries) and returns a `Signal<boolean>` which automatically updates when the query result changes.
 
-| Function           | Parameters      | Returns           | Description                                               |
-| ------------------ | --------------- | ----------------- | --------------------------------------------------------- |
-| `matchMediaSignal` | `query: string` | `Signal<boolean>` | Provides a signal representing the state of a media query |
+| Function           | Parameters                                         | Returns           | Description                                               |
+| ------------------ | -------------------------------------------------- | ----------------- | --------------------------------------------------------- |
+| `matchMediaSignal` | `query: string, options?: CreateMediaQueryOptions` | `Signal<boolean>` | Provides a signal representing the state of a media query |
 
 > **Tip:** Use this API for media queries that are not part of your breakpoint map.
 
@@ -154,9 +154,29 @@ import { matchMediaSignal } from 'ngx-mq';
 export const isLandscape = (): Signal<boolean> => matchMediaSignal('(orientation: landscape)');
 ```
 
+## Providers
+
+| Provider                        | Parameters           | Description                                                                                                                |
+| ------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `provideBreakpoints()`          | `bps: MqBreakpoints` | Registers a custom set of breakpoints.                                                                                     |
+| `provideTailwindBreakpoints()`  | none                 | Registers the default Tailwind CSS breakpoints.                                                                            |
+| `provideBootstrapBreakpoints()` | none                 | Registers the default Bootstrap breakpoints.                                                                               |
+| `provideMaterialBreakpoints()`  | none                 | Registers the default Angular Material breakpoints.                                                                        |
+| `provideBreakpointEpsilon()`    | `epsilon: number`    | Sets the epsilon threshold used when comparing breakpoint values.                                                          |
+| `provideSsrValue()`             | `value: boolean`     | Defines the static signal value used during SSR, since media queries are not available on the server. Defaults to `false`. |
+
 ## Types
 
 ```ts
+export type MqBreakpoints = Record<string, number>;
+
+export interface CreateMediaQueryOptions {
+  /**
+   * Static signal value used during SSR.
+   */
+  ssrValue?: boolean;
+}
+
 export type DisplayModeOption =
   | 'browser'
   | 'fullscreen'
