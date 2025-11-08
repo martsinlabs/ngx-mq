@@ -4,6 +4,7 @@ import {
   provideBootstrapBreakpoints,
   provideMaterialBreakpoints,
   provideBreakpointEpsilon,
+  provideSsrValue,
 } from './providers';
 import {
   TAILWIND_BREAKPOINTS,
@@ -11,7 +12,7 @@ import {
   MATERIAL_BREAKPOINTS,
   DEFAULT_BREAKPOINT_EPSILON,
 } from './constants';
-import { MQ_BREAKPOINT_EPSILON, MQ_BREAKPOINTS } from './tokens';
+import { MQ_BREAKPOINT_EPSILON, MQ_BREAKPOINTS, NGX_MQ_SSR_VALUE } from './tokens';
 import { ValueProvider } from '@angular/core';
 
 describe('providers', () => {
@@ -64,6 +65,15 @@ describe('providers', () => {
 
       expect(provider.provide).toBe(MQ_BREAKPOINT_EPSILON);
       expect(provider.useValue).toBe(DEFAULT_BREAKPOINT_EPSILON);
+    });
+  });
+
+  describe('provideSsrValue()', () => {
+    it('should return SSR value provider with given value', () => {
+      const provider = provideSsrValue(true) as ValueProvider;
+
+      expect(provider.provide).toBe(NGX_MQ_SSR_VALUE);
+      expect(provider.useValue).toBe(true);
     });
   });
 });
