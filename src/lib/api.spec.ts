@@ -1,7 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { Signal, isSignal } from '@angular/core';
 import { provideBreakpoints } from './providers';
-import { up, down, between, matchMediaSignal, orientation, colorScheme, displayMode, reducedMotion } from './api';
+import {
+  up,
+  down,
+  between,
+  matchMediaSignal,
+  orientation,
+  colorScheme,
+  displayMode,
+  reducedMotion,
+  hover,
+} from './api';
 
 describe('Public API', () => {
   beforeEach(() => {
@@ -77,6 +87,16 @@ describe('Public API', () => {
       expect(isSignal(signal)).toBe(true);
       expect(typeof signal()).toBe('boolean');
       expect(signal.toString()).toContain('reducedMotion');
+    });
+  });
+
+  describe('hover()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => hover());
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('hover');
     });
   });
 
