@@ -1,5 +1,5 @@
 import { isDevMode, Provider } from '@angular/core';
-import { MQ_BREAKPOINT_EPSILON, MQ_BREAKPOINTS } from './tokens';
+import { MQ_BREAKPOINT_EPSILON, MQ_BREAKPOINTS, NGX_MQ_SSR_VALUE } from './tokens';
 import { normalizeBreakpoints, validateEpsilon } from './utils/breakpoints.utils';
 import { MqBreakpoints } from './models';
 import {
@@ -29,4 +29,8 @@ export function provideBreakpointEpsilon(epsilon: number = DEFAULT_BREAKPOINT_EP
   if (isDevMode()) validateEpsilon(epsilon);
 
   return { provide: MQ_BREAKPOINT_EPSILON, useValue: epsilon };
+}
+
+export function provideSsrValue(value: boolean): Provider {
+  return { provide: NGX_MQ_SSR_VALUE, useValue: value };
 }
