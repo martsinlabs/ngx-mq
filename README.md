@@ -126,12 +126,13 @@ export const isDesktop = (): Signal<boolean> => up('lg');
 
 Utils exposing common CSS media features.
 
-| Function        | Parameters                                                            | Returns           | Description                                                             |
-| --------------- | --------------------------------------------------------------------- | ----------------- | ----------------------------------------------------------------------- |
-| `orientation`   | `value: 'portrait' \| 'landscape', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the current screen orientation matches the specified value. |
-| `colorScheme`   | `value: 'light' \| 'dark', options?: CreateMediaQueryOptions`         | `Signal<boolean>` | `true` when the system color scheme matches the specified value.        |
-| `displayMode`   | `value: DisplayModeOption, options?: CreateMediaQueryOptions`         | `Signal<boolean>` | `true` when the current display mode matches the specified value.       |
-| `reducedMotion` | `options?: CreateMediaQueryOptions`                                   | `Signal<boolean>` | `true` when the user has enabled reduced motion.                        |
+| Function        | Parameters                          | Returns           | Description                                                             |
+| --------------- | ----------------------------------- | ----------------- | ----------------------------------------------------------------------- |
+| `orientation`   | `value: 'portrait' \| 'landscape'`  | `Signal<boolean>` | `true` when the current screen orientation matches the specified value. |
+| `colorScheme`   | `value: 'light' \| 'dark'`          | `Signal<boolean>` | `true` when the system color scheme matches the specified value.        |
+| `displayMode`   | `value: DisplayModeOption`          | `Signal<boolean>` | `true` when the current display mode matches the specified value.       |
+| `reducedMotion` | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user has enabled reduced motion.                        |
+| `hover`         | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user's primary input device supports hover capability.  |
 
 ---
 
