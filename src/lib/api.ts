@@ -83,6 +83,17 @@ export function reducedMotion(): Signal<boolean> {
   return consumer;
 }
 
+export function hover(): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(hover);
+
+  const query: string = normalizeQuery('(hover: hover)');
+  const consumer: Signal<boolean> = createConsumer(query);
+
+  consumer.toString = () => createConsumerLabel('hover');
+
+  return consumer;
+}
+
 export function matchMediaSignal(query: string): Signal<boolean> {
   isDevMode() && assertInInjectionContext(matchMediaSignal);
 

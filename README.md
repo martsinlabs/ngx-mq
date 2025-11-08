@@ -132,6 +132,7 @@ Utils exposing common CSS media features.
 | `colorScheme`   | `value: 'light' \| 'dark'`         | `Signal<boolean>` | `true` when the system color scheme matches the specified value.        |
 | `displayMode`   | `value: DisplayModeOption`         | `Signal<boolean>` | `true` when the current display mode matches the specified value.       |
 | `reducedMotion` | none                               | `Signal<boolean>` | `true` when the user has enabled reduced motion.                        |
+| `hover`         | none                               | `Signal<boolean>` | `true` when the user's primary input device supports hover capability.  |
 
 ---
 
