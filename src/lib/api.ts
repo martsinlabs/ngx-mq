@@ -87,7 +87,7 @@ export function hover(options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(hover);
 
   const query: string = normalizeQuery('(hover: hover)');
-  const consumer: Signal<boolean> = createConsumer(query, options?.debugName);
+  const consumer: Signal<boolean> = createConsumer(query, options);
 
   consumer.toString = () => createConsumerLabel('hover');
 
