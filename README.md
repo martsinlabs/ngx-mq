@@ -156,6 +156,8 @@ export const isLandscape = (): Signal<boolean> => matchMediaSignal('(orientation
 
 ## Providers
 
+These functions return standard Angular `Provider` instances that can be injected at any level of the application hierarchy.
+
 | Provider                        | Parameters           | Description                                                                                                                |
 | ------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `provideBreakpoints()`          | `bps: MqBreakpoints` | Registers a custom set of breakpoints.                                                                                     |
@@ -164,6 +166,9 @@ export const isLandscape = (): Signal<boolean> => matchMediaSignal('(orientation
 | `provideMaterialBreakpoints()`  | none                 | Registers the default Angular Material breakpoints.                                                                        |
 | `provideBreakpointEpsilon()`    | `epsilon: number`    | Sets the epsilon threshold used when comparing breakpoint values.                                                          |
 | `provideSsrValue()`             | `value: boolean`     | Defines the static signal value used during SSR, since media queries are not available on the server. Defaults to `false`. |
+
+> 💡 To register these as environment providers, wrap them with [`makeEnvironmentProviders()`](https://angular.dev/api/core/makeEnvironmentProviders).
+
 
 ## Types
 
