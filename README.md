@@ -133,6 +133,7 @@ Utils exposing common CSS media features.
 | `displayMode`   | `value: DisplayModeOption`          | `Signal<boolean>` | `true` when the current display mode matches the specified value.       |
 | `reducedMotion` | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user has enabled reduced motion.                        |
 | `hover`         | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user's primary input device supports hover capability.  |
+| `anyHover`      | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when any available input device supports hover capability.       |
 
 ---
 
@@ -168,7 +169,6 @@ These functions return standard Angular `Provider` instances that can be injecte
 | `provideSsrValue()`             | `value: boolean`     | Defines the static signal value used during SSR, since media queries are not available on the server. Defaults to `false`. |
 
 > 💡 To register these as environment providers, wrap them with [`makeEnvironmentProviders()`](https://v18.angular.dev/api/core/makeEnvironmentProviders).
-
 
 ## Types
 

@@ -11,6 +11,7 @@ import {
   displayMode,
   reducedMotion,
   hover,
+  anyHover,
 } from './api';
 
 describe('Public API', () => {
@@ -97,6 +98,16 @@ describe('Public API', () => {
       expect(isSignal(signal)).toBe(true);
       expect(typeof signal()).toBe('boolean');
       expect(signal.toString()).toContain('hover');
+    });
+  });
+
+  describe('anyHover()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => anyHover());
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('anyHover');
     });
   });
 
