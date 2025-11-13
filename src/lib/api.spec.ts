@@ -12,6 +12,7 @@ import {
   reducedMotion,
   hover,
   anyHover,
+  pointer,
 } from './api';
 
 describe('Public API', () => {
@@ -108,6 +109,16 @@ describe('Public API', () => {
       expect(isSignal(signal)).toBe(true);
       expect(typeof signal()).toBe('boolean');
       expect(signal.toString()).toContain('anyHover');
+    });
+  });
+
+  describe('pointer()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => pointer('fine'));
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('pointer');
     });
   });
 

@@ -105,6 +105,17 @@ export function anyHover(options?: CreateMediaQueryOptions): Signal<boolean> {
   return consumer;
 }
 
+export function pointer(value: 'fine' | 'coarse' | 'none', options?: CreateMediaQueryOptions): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(pointer);
+
+  const query: string = normalizeQuery(`(pointer: ${value})`);
+  const consumer: Signal<boolean> = createConsumer(query, options);
+
+  consumer.toString = () => createConsumerLabel(`pointer(${value})`);
+
+  return consumer;
+}
+
 export function matchMediaSignal(query: string, options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(matchMediaSignal);
 
