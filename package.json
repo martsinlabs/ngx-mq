@@ -24,7 +24,6 @@
     "matchMedia",
     "media-query",
     "breakpoints",
-    "media-observer",
     "responsive"
   ],
   "license": "MIT",
