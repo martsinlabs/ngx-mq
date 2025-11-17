@@ -126,14 +126,15 @@ export const isDesktop = (): Signal<boolean> => up('lg');
 
 Utils exposing common CSS media features.
 
-| Function        | Parameters                          | Returns           | Description                                                             |
-| --------------- | ----------------------------------- | ----------------- | ----------------------------------------------------------------------- |
-| `orientation`   | `value: 'portrait' \| 'landscape'`  | `Signal<boolean>` | `true` when the current screen orientation matches the specified value. |
-| `colorScheme`   | `value: 'light' \| 'dark'`          | `Signal<boolean>` | `true` when the system color scheme matches the specified value.        |
-| `displayMode`   | `value: DisplayModeOption`          | `Signal<boolean>` | `true` when the current display mode matches the specified value.       |
-| `reducedMotion` | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user has enabled reduced motion.                        |
-| `hover`         | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user's primary input device supports hover capability.  |
-| `anyHover`      | `options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when any available input device supports hover capability.       |
+| Function        | Parameters                                                               | Returns           | Description                                                                     |
+| --------------- | ------------------------------------------------------------------------ | ----------------- | ------------------------------------------------------------------------------- |
+| `orientation`   | `value: 'portrait' \| 'landscape'`                                       | `Signal<boolean>` | `true` when the current screen orientation matches the specified value.         |
+| `colorScheme`   | `value: 'light' \| 'dark'`                                               | `Signal<boolean>` | `true` when the system color scheme matches the specified value.                |
+| `displayMode`   | `value: DisplayModeOption`                                               | `Signal<boolean>` | `true` when the current display mode matches the specified value.               |
+| `reducedMotion` | `options?: CreateMediaQueryOptions`                                      | `Signal<boolean>` | `true` when the user has enabled reduced motion.                                |
+| `hover`         | `options?: CreateMediaQueryOptions`                                      | `Signal<boolean>` | `true` when the user's primary input device supports hover capability.          |
+| `anyHover`      | `options?: CreateMediaQueryOptions`                                      | `Signal<boolean>` | `true` when any available input device supports hover capability.               |
+| `pointer`       | `value: 'fine' \| 'coarse' \| 'none', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user's primary input device matches the specified pointer type. |
 
 ---
 
