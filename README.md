@@ -165,7 +165,7 @@ These functions return standard Angular `Provider` instances that can be injecte
 | `provideBreakpoints()`          | `bps: MqBreakpoints` | Registers a custom set of breakpoints.                                                                                     |
 | `provideTailwindBreakpoints()`  | none                 | Registers the default Tailwind CSS breakpoints.                                                                            |
 | `provideBootstrapBreakpoints()` | none                 | Registers the default Bootstrap breakpoints.                                                                               |
-| `provideMaterialBreakpoints()`  | none                 | Registers the default Angular Material breakpoints.                                                                        |
+| `provideMaterialBreakpoints()`  | none                 | Registers the default Material 2 breakpoints.                                                                        |
 | `provideBreakpointEpsilon()`    | `epsilon: number`    | Sets the epsilon threshold used when comparing breakpoint values.                                                          |
 | `provideSsrValue()`             | `value: boolean`     | Defines the static signal value used during SSR, since media queries are not available on the server. Defaults to `false`. |
 
