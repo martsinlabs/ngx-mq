@@ -165,7 +165,7 @@ These functions return standard Angular `Provider` instances that can be injecte
 | `provideBreakpoints()`          | `bps: MqBreakpoints` | Registers a custom set of breakpoints.                                                                                     |
 | `provideTailwindBreakpoints()`  | none                 | Registers the default Tailwind CSS breakpoints.                                                                            |
 | `provideBootstrapBreakpoints()` | none                 | Registers the default Bootstrap breakpoints.                                                                               |
-| `provideMaterialBreakpoints()`  | none                 | Registers the default Material 2 breakpoints.                                                                        |
+| `provideMaterialBreakpoints()`  | none                 | Registers the default Material 2 breakpoints.                                                                              |
 | `provideBreakpointEpsilon()`    | `epsilon: number`    | Sets the epsilon threshold used when comparing breakpoint values.                                                          |
 | `provideSsrValue()`             | `value: boolean`     | Defines the static signal value used during SSR, since media queries are not available on the server. Defaults to `false`. |
 
@@ -191,6 +191,26 @@ export type DisplayModeOption =
   | 'window-controls-overlay'
   | 'picture-in-picture';
 ```
+
+## Sponsors
+
+<table>
+  <tr>
+    <td width="240" align="center">
+      <p>
+        <img
+          src="https://raw.githubusercontent.com/getsentry/sentry/7b65f0f23d7eb5ccc035b12776bf5d8f3d9f8965/static/images/logo-sentry.svg"
+          width="120"
+          alt="Sentry Logo" />
+      </p>
+      <p>
+        <a href="https://sentry.io" target="_blank"><strong>Sentry</strong></a>
+        <br />
+        Error tracking and performance monitoring.
+      </p>
+    </td>
+  </tr>
+</table>
 
 ## Contributing
 
