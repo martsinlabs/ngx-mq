@@ -53,7 +53,7 @@ Choose the package version that matches your Angular setup:
 # For Angular 16–18
 npm install ngx-mq@1
 
-# For Angular 19–20
+# For Angular 19–21
 npm install ngx-mq@2
 ```
 
