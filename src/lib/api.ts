@@ -116,6 +116,17 @@ export function pointer(value: 'fine' | 'coarse' | 'none', options?: CreateMedia
   return consumer;
 }
 
+export function anyPointer(value: 'fine' | 'coarse' | 'none', options?: CreateMediaQueryOptions): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(anyPointer);
+
+  const query: string = normalizeQuery(`(any-pointer: ${value})`);
+  const consumer: Signal<boolean> = createConsumer(query, options);
+
+  consumer.toString = () => createConsumerLabel(`anyPointer(${value})`);
+
+  return consumer;
+}
+
 export function matchMediaSignal(query: string, options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(matchMediaSignal);
 
