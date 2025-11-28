@@ -135,6 +135,7 @@ Utils exposing common CSS media features.
 | `hover`         | `options?: CreateMediaQueryOptions`                                      | `Signal<boolean>` | `true` when the user's primary input device supports hover capability.          |
 | `anyHover`      | `options?: CreateMediaQueryOptions`                                      | `Signal<boolean>` | `true` when any available input device supports hover capability.               |
 | `pointer`       | `value: 'fine' \| 'coarse' \| 'none', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user's primary input device matches the specified pointer type. |
+| `anyPointer`    | `value: 'fine' \| 'coarse' \| 'none', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when any available input device matches the specified pointer type.      |
 
 ---
 
