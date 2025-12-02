@@ -136,6 +136,7 @@ Utils exposing common CSS media features.
 | `anyHover`      | `options?: CreateMediaQueryOptions`                                      | `Signal<boolean>` | `true` when any available input device supports hover capability.               |
 | `pointer`       | `value: 'fine' \| 'coarse' \| 'none', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user's primary input device matches the specified pointer type. |
 | `anyPointer`    | `value: 'fine' \| 'coarse' \| 'none', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when any available input device matches the specified pointer type.      |
+| `colorGamut`    | `value: 'srgb' \| 'p3' \| 'rec2020', options?: CreateMediaQueryOptions`  | `Signal<boolean>` | `true` when the user's display supports the specified color gamut.              |
 
 ---
 

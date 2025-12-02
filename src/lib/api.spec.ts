@@ -14,6 +14,7 @@ import {
   anyHover,
   pointer,
   anyPointer,
+  colorGamut,
 } from './api';
 
 describe('Public API', () => {
@@ -130,6 +131,16 @@ describe('Public API', () => {
       expect(isSignal(signal)).toBe(true);
       expect(typeof signal()).toBe('boolean');
       expect(signal.toString()).toContain('anyPointer');
+    });
+  });
+
+  describe('colorGamut()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => colorGamut('p3'));
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('colorGamut');
     });
   });
 

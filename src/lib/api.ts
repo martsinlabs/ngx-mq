@@ -127,6 +127,17 @@ export function anyPointer(value: 'fine' | 'coarse' | 'none', options?: CreateMe
   return consumer;
 }
 
+export function colorGamut(value: 'srgb' | 'p3' | 'rec2020', options?: CreateMediaQueryOptions): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(colorGamut);
+
+  const query: string = normalizeQuery(`(color-gamut: ${value})`);
+  const consumer: Signal<boolean> = createConsumer(query, options);
+
+  consumer.toString = () => createConsumerLabel(`colorGamut(${value})`);
+
+  return consumer;
+}
+
 export function matchMediaSignal(query: string, options?: CreateMediaQueryOptions): Signal<boolean> {
   isDevMode() && assertInInjectionContext(matchMediaSignal);
 
