@@ -61,18 +61,12 @@ npm install ngx-mq@2
 
 ### Configuration
 
-Provide your map at the application bootstrap.
+Create a custom breakpoint map or use one of the built-in presets (e.g. `provideTailwindBreakpoints()`).
 
 ```ts
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import {
-  provideBreakpoints,
-  provideTailwindBreakpoints,
-  provideBootstrapBreakpoints,
-  provideMaterialBreakpoints,
-  provideBreakpointEpsilon,
-} from 'ngx-mq';
+import { provideBreakpoints } from 'ngx-mq';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -82,14 +76,6 @@ bootstrapApplication(AppComponent, {
       md: 768,
       lg: 1024,
     }),
-
-    // Or use one of the built-in presets
-    // provideTailwindBreakpoints(),
-    // provideBootstrapBreakpoints(),
-    // provideMaterialBreakpoints(),
-
-    // Configure epsilon if needed (default: 0.02)
-    provideBreakpointEpsilon(0.02),
   ],
 });
 ```
@@ -99,8 +85,6 @@ bootstrapApplication(AppComponent, {
 - **Tailwind** → `sm: 640, md: 768, lg: 1024, xl: 1280, 2xl: 1536`
 - **Bootstrap** → `sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400`
 - **Material** → `sm: 600, md: 905, lg: 1240, xl: 1440`
-
-> **Note**: Epsilon is a small value subtracted from upper bounds to prevent adjacent ranges from overlapping.
 
 ### BP-related utilities
 
