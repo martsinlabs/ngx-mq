@@ -32,7 +32,7 @@
 - Lightweight
 - SSR-safe
 - Auto-cleanup
-- Angular 16 — next
+- Angular 19–21 (use `ngx-mq@1` for Angular 16–18)
 - Well-tested
 
 ## Introduction
@@ -92,7 +92,9 @@ bootstrapApplication(AppComponent, {
 | --------- | ----------------------------------------------------------------- | ----------------- | --------------------------------------------- |
 | `up`      | `bp: string, options?: CreateMediaQueryOptions`                   | `Signal<boolean>` | `true` when viewport width ≥ breakpoint       |
 | `down`    | `bp: string, options?: CreateMediaQueryOptions`                   | `Signal<boolean>` | `true` when viewport width < breakpoint       |
-| `between` | `minBp: string, maxBp: string, options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when viewport width is in range [a, b] |
+| `between` | `minBp: string, maxBp: string, options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when viewport width is in range [min, max) |
+
+> **Note:** `down` and `between` upper bounds are **exclusive** — epsilon is subtracted from `max` so adjacent ranges (e.g. `down('md')` and `up('md')`) never overlap.
 
 > **Tip:** Wrap these APIs into reusable helpers:
 

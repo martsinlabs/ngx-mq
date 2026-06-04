@@ -32,6 +32,17 @@ describe('resolveBreakpoint()', () => {
       expect(resolveBreakpoint('md')).toBe(768);
     });
   });
+
+  it('should trim whitespace around the breakpoint name before lookup', () => {
+    const injector: Injector = Injector.create({
+      providers: [provideBreakpoints({ md: 768 })],
+      parent: TestBed.inject(EnvironmentInjector),
+    });
+
+    runInInjectionContext(injector, () => {
+      expect(resolveBreakpoint('  md  ')).toBe(768);
+    });
+  });
 });
 
 describe('normalizeBreakpoints()', () => {
