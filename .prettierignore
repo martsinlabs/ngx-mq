@@ -2,6 +2,7 @@
 /node_modules
 /dist
 /coverage
+/typedoc-docs
 /.angular
 demo/dist
 demo/node_modules

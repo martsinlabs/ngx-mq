@@ -43,4 +43,4 @@ jobs:
 
       - name: Publish
         working-directory: dist
-        run: npm publish --tag ${{ steps.disttag.outputs.tag }}
+        run: npm publish --provenance --access public --tag ${{ steps.disttag.outputs.tag }}

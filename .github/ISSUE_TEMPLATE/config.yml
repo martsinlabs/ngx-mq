@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://martsinlabs.github.io/ngx-mq
+    about: API reference and guides. Check here before opening an issue.
+  - name: Question or discussion
+    url: https://github.com/martsinlabs/ngx-mq/discussions
+    about: Ask questions and share ideas with the community.

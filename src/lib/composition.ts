@@ -12,9 +12,22 @@ function describe(condition: Signal<boolean>): string {
 }
 
 /**
- * Combines boolean signals with logical AND.
- * The resulting signal is `true` only when every condition is `true`.
- * An empty call returns a signal that is always `true`.
+ * Combines boolean signals with logical **AND**.
+ *
+ * Composition happens at the signal level, so the underlying media-query
+ * listeners stay shared and are still cleaned up automatically.
+ *
+ * @param conditions - Boolean signals to combine. An empty call returns a
+ * signal that is always `true` (vacuous truth).
+ * @returns A `Signal<boolean>` that is `true` only when **every** condition is `true`.
+ *
+ * @example
+ * ```ts
+ * readonly isLandscapeDesktop = and(up('lg'), orientation('landscape'), hover());
+ * ```
+ *
+ * @see {@link or} and {@link not}.
+ * @category Combining Signals
  */
 export function and(...conditions: Signal<boolean>[]): Signal<boolean> {
   const result: Signal<boolean> = computed(() => conditions.every((condition: Signal<boolean>) => condition()));
@@ -25,9 +38,22 @@ export function and(...conditions: Signal<boolean>[]): Signal<boolean> {
 }
 
 /**
- * Combines boolean signals with logical OR.
- * The resulting signal is `true` when at least one condition is `true`.
- * An empty call returns a signal that is always `false`.
+ * Combines boolean signals with logical **OR**.
+ *
+ * Composition happens at the signal level, so the underlying media-query
+ * listeners stay shared and are still cleaned up automatically.
+ *
+ * @param conditions - Boolean signals to combine. An empty call returns a
+ * signal that is always `false`.
+ * @returns A `Signal<boolean>` that is `true` when **at least one** condition is `true`.
+ *
+ * @example
+ * ```ts
+ * readonly prefersSimpleUi = or(down('md'), reducedMotion());
+ * ```
+ *
+ * @see {@link and} and {@link not}.
+ * @category Combining Signals
  */
 export function or(...conditions: Signal<boolean>[]): Signal<boolean> {
   const result: Signal<boolean> = computed(() => conditions.some((condition: Signal<boolean>) => condition()));
@@ -39,7 +65,20 @@ export function or(...conditions: Signal<boolean>[]): Signal<boolean> {
 
 /**
  * Negates a boolean signal.
- * The resulting signal is `true` when the condition is `false`, and vice versa.
+ *
+ * Useful for features that have no direct inverse helper, such as
+ * "devices without hover": `not(hover())`.
+ *
+ * @param condition - The boolean signal to invert.
+ * @returns A `Signal<boolean>` that is `true` when `condition` is `false`, and vice versa.
+ *
+ * @example
+ * ```ts
+ * readonly isTouchLike = not(hover());
+ * ```
+ *
+ * @see {@link and} and {@link or}.
+ * @category Combining Signals
  */
 export function not(condition: Signal<boolean>): Signal<boolean> {
   const result: Signal<boolean> = computed(() => !condition());

@@ -7,6 +7,9 @@
     "url": "https://github.com/martsinlabs/ngx-mq.git"
   },
   "homepage": "https://github.com/martsinlabs/ngx-mq#readme",
+  "bugs": {
+    "url": "https://github.com/martsinlabs/ngx-mq/issues"
+  },
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
@@ -16,6 +19,7 @@
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "build": "ng-packagr -p ng-package.json",
     "build:watch": "ng-packagr -w -p ng-package.json",
+    "docs": "typedoc",
     "size": "size-limit",
     "format": "prettier --write .",
     "clean": "rimraf dist"
@@ -31,6 +35,13 @@
   "license": "MIT",
   "sideEffects": false,
   "author": "Myroslav Martsin",
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
+  },
   "workspaces": [
     "demo"
   ],
@@ -53,6 +64,8 @@
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "size-limit": "^12.1.0",
+    "typedoc": "^0.28.19",
+    "typedoc-material-theme": "^1.4.1",
     "typescript": "^5.5",
     "vite": "^7.1.5",
     "vitest": "^4.1.8"
