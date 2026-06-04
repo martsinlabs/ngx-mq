@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ github.ref_name == '1.x.x' && '20' || '22' }}
           cache: 'npm'
@@ -44,6 +44,6 @@ jobs:
       # --- Upload coverage only for main branch ---
       - name: Upload coverage reports to Codecov
         if: github.ref_name == 'main'
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
