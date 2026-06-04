@@ -32,7 +32,7 @@
 - Lightweight
 - SSR-safe
 - Auto-cleanup
-- Angular 19–21 (use `ngx-mq@1` for Angular 16–18)
+- Angular 20–22 (use `ngx-mq@2` for Angular 19, `ngx-mq@1` for 16–18)
 - Well-tested
 
 ## Introduction
@@ -53,8 +53,11 @@ Choose the package version that matches your Angular setup:
 # For Angular 16–18
 npm install ngx-mq@1
 
-# For Angular 19–21
+# For Angular 19
 npm install ngx-mq@2
+
+# For Angular 20–22
+npm install ngx-mq@3
 ```
 
 ## Breakpoint API
