@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { applyMaxEpsilon, normalizeBreakpoints, resolveBreakpoint, validateEpsilon } from './breakpoints.utils';
 import { EnvironmentInjector, runInInjectionContext, Injector } from '@angular/core';
 import { provideBreakpoints } from '../providers';

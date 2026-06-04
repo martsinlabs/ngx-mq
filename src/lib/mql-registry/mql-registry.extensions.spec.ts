@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { runInInjectionContext, Component } from '@angular/core';
 import { retainUntilDestroy } from './mql-registry.extensions';
 import { TestBed } from '@angular/core/testing';
@@ -14,7 +15,7 @@ describe('retainUntilDestroy()', () => {
   });
 
   it('should call release when destroy is triggered', () => {
-    const releaseSpy = jest.spyOn(registry, 'release');
+    const releaseSpy = vi.spyOn(registry, 'release');
     const fixture = TestBed.createComponent(HostComponent);
     const injector = fixture.componentRef.injector;
 
