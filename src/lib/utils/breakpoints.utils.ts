@@ -31,7 +31,7 @@ function assertBreakpointExists(bp: string, breakpoints: MqBreakpoints): number 
 export function resolveBreakpoint(bp: string): number {
   const breakpoints: MqBreakpoints = assertBreakpointsProvided();
 
-  return assertBreakpointExists(bp, breakpoints);
+  return assertBreakpointExists(bp.trim(), breakpoints);
 }
 
 export function normalizeBreakpoints(bps: MqBreakpoints): Readonly<MqBreakpoints> {
@@ -63,7 +63,7 @@ export function validateEpsilon(epsilon: number): void {
 }
 
 export function applyMaxEpsilon(value: number): number {
-  const epsilon: number = inject(MQ_BREAKPOINT_EPSILON, { optional: true }) ?? 0.02;
+  const epsilon: number = inject(MQ_BREAKPOINT_EPSILON);
 
   return value - epsilon;
 }
