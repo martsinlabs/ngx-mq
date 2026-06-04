@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 import { DestroyRef, Injector, Signal } from '@angular/core';
 import { retain, release, MqRetainToken } from '../mql-registry';
 import { _getRegistry, _resetRegistry } from './mql-registry';

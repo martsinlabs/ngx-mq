@@ -1,0 +1,44 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "tsconfig": "tsconfig.json",
+  "out": "typedoc-docs",
+  "name": "ngx-mq",
+  "readme": "README.md",
+  "exclude": ["**/*.spec.ts"],
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "githubPages": false,
+  "plugin": ["typedoc-material-theme"],
+  "themeColor": "#4f46e5",
+  "customCss": "./typedoc-theme.css",
+  "customJs": "./typedoc-theme.js",
+  "categorizeByGroup": false,
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": false,
+    "includeFolders": false
+  },
+  "categoryOrder": [
+    "Guides",
+    "Breakpoints",
+    "Media Features",
+    "Custom Queries",
+    "Combining Signals",
+    "Providers",
+    "Types",
+    "Injection Tokens",
+    "*"
+  ],
+  "navigationLinks": {
+    "GitHub": "https://github.com/martsinlabs/ngx-mq",
+    "npm": "https://www.npmjs.com/package/ngx-mq"
+  },
+  "externalSymbolLinkMappings": {
+    "@angular/core": {
+      "Provider": "https://angular.dev/api/core/Provider",
+      "Signal": "https://angular.dev/api/core/Signal",
+      "InjectionToken": "https://angular.dev/api/core/InjectionToken"
+    }
+  }
+}

@@ -3,15 +3,15 @@ name: Publish Package
 on:
   push:
     tags:
-      - 'v2.*.*'
-
-permissions:
-  id-token: write
-  contents: read
+      - 'v3.*.*'
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -31,6 +31,16 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Determine npm dist-tag
+        id: disttag
+        run: |
+          VERSION="$(node -p "require('./dist/package.json').version")"
+          if [[ "$VERSION" == *-* ]]; then
+            echo "tag=next" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=latest" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Publish
         working-directory: dist
-        run: npm publish
+        run: npm publish --provenance --access public --tag ${{ steps.disttag.outputs.tag }}

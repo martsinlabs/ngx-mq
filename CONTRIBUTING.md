@@ -1,92 +1,113 @@
-# Contributing
+# Contributing to ngx-mq
 
-Thanks for your interest in contributing to `ngx-mq`. <br>
-The goal of this project is to provide a simple and declarative way to handle media queries in Angular. <br>
-Please review the guidelines below to ensure your contributions align with the project’s standards.
+Thanks for your interest in improving `ngx-mq`. This guide covers everything you need to set up the
+project, make a change, and open a pull request that passes CI on the first try.
 
-## Getting Started
+## Prerequisites
 
-Follow the steps below to set up the project locally.
+- **Node.js 20 or later** (CI runs on Node 22)
+- **npm** (the repository ships an `.npmrc`, so a plain `npm install` resolves all dependencies)
 
-> 💡 **Tip:**
-> If you're contributing for the first time, please **fork the repository** before cloning it.
-> This ensures you can push your changes to your own fork and open a Pull Request later.
+## Getting started
+
+If this is your first contribution, **fork the repository** first so you can push your branch and
+open a pull request from your fork.
 
 ```bash
-# clone your fork
-git clone https://github.com/<username>/ngx-mq.git
+# Clone your fork
+git clone https://github.com/<your-username>/ngx-mq.git
 cd ngx-mq
 npm install
+
+# Build the library in watch mode...
 npm run build:watch
+
+# ...and run the demo app against it in a second terminal
 cd demo
 npm start
 ```
 
-You’re ready to start contributing.
+## Project structure
 
-## Branch & Commit Rules
+| Path           | Purpose                                                        |
+| -------------- | ------------------------------------------------------------- |
+| `src/lib`      | Library source (public API, providers, tokens, registry)      |
+| `src/index.ts` | Public entry point. Anything exported here is part of the API |
+| `guides/`      | Markdown guide pages rendered into the docs site              |
+| `demo/`        | Standalone Angular app for manual testing                     |
 
-To keep the repository clean and easy to maintain, please follow the branch and commit naming conventions below.
+For a deeper look at the internal design (the query registry, lifecycle, and SSR handling), see
+[ARCHITECTURE.md](./ARCHITECTURE.md).
 
-### Branch naming
+## Development workflow
 
-Use short, descriptive branch names based on the task type:
+| Command                 | What it does                                      |
+| ----------------------- | ------------------------------------------------- |
+| `npm run build`         | Build the library with ng-packagr                 |
+| `npm run build:watch`   | Rebuild on change                                 |
+| `npm test`              | Run the Vitest suite once                          |
+| `npm run test:watch`    | Run Vitest in watch mode                           |
+| `npm run test:coverage` | Run tests with coverage                            |
+| `npm run lint`          | Lint with ESLint                                   |
+| `npm run lint:fix`      | Lint and auto-fix                                  |
+| `npm run format`        | Format with Prettier                               |
+| `npm run size`          | Check the gzipped bundle against the size budget   |
+| `npm run docs`          | Generate the API documentation locally             |
 
-```bash
-feat/add-feature
-fix/resolve-issue
-docs/update-guide
-refactor/cleanup
-```
+## Before you open a pull request
 
-### Commit messages
-
-Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0) format:
-
-```bash
-<type>(optional scope): short description
-```
-
-Common types: feat, fix, docs, refactor, test, chore <br>
-Keep commits focused, one change at a time.
-
-## Code Style & Linting
-
-Consistent code style helps keep the project readable and easy to maintain.
-Run the linters before committing any changes.
+CI runs lint, tests, build, and the size check. Run them locally to match:
 
 ```bash
 npm run lint
+npm run test:coverage
+npm run build
+npm run size
 ```
 
-## Testing
+Please also:
 
-Tests help ensure the library remains stable and predictable as it evolves.
-Run all tests locally before submitting a pull request.
+- Add or update tests for any behavior change.
+- Update the README and TSDoc comments when you change the public API.
+- Keep changes focused: one logical change per pull request.
 
-```bash
-npm run test
+## Commit and branch conventions
+
+Use short, type-prefixed branch names:
+
+```
+feat/add-prefers-contrast
+fix/ssr-default-value
+docs/update-recipes
 ```
 
-Aim to keep test coverage high and meaningful.
+Write commits in [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0) style:
 
-## Pull Requests
+```
+<type>(optional scope): short description
+```
 
-> **Important:**  
-> Do **not** open pull requests directly to the `main` branch.  
-> The `main` branch represents the upcoming development baseline and may contain unreleased or experimental changes.
+Common types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`.
 
-Each published version of **ngx-mq** has its own **release branch**:
+## Pull requests
 
-- `1.x.x` → for Angular 16 – 18 compatible releases
-- `2.x.x` → for Angular 19 – 20 compatible releases
-- _(future majors will follow the same pattern)_
+> **Do not open pull requests directly against `main`.** It is the upcoming development baseline and
+> may contain unreleased or experimental work.
 
-When submitting a PR:
+Each Angular major has its own release branch. Open your pull request against the branch that matches
+your target Angular version:
 
-1. Identify which Angular version your change applies to.
-2. Open your PR against the corresponding branch (`1.x.x`, `2.x.x`, etc.).
-3. Use `main` only if your contribution targets upcoming major features.
+| Branch   | Angular     |
+| -------- | ----------- |
+| `3.x.x`  | 20 - 22     |
+| `2.x.x`  | 19          |
+| `1.x.x`  | 16 - 18     |
 
-Keep pull requests clear and focused. <br>
-Follow the provided template and include a concise description of your changes.
+Future majors follow the same pattern. When you open the pull request, fill in the template and give
+a clear, concise description of what changed and why.
+
+## Reporting issues
+
+Found a bug or have a feature request? Please
+[open an issue](https://github.com/martsinlabs/ngx-mq/issues) with a minimal reproduction (a
+StackBlitz link is ideal) and the Angular and `ngx-mq` versions you are using.

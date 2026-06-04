@@ -1,20 +1,26 @@
 {
   "name": "ngx-mq",
-  "version": "2.11.2",
-  "description": "Signal-powered breakpoints and media queries for Angular.",
+  "version": "3.0.0",
+  "description": "Signal-powered breakpoints and media queries for Angular. SSR-safe, zoneless-ready, no RxJS.",
   "repository": {
     "type": "git",
     "url": "https://github.com/martsinlabs/ngx-mq.git"
   },
   "homepage": "https://github.com/martsinlabs/ngx-mq#readme",
+  "bugs": {
+    "url": "https://github.com/martsinlabs/ngx-mq/issues"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "build": "ng-packagr -p ng-package.json",
     "build:watch": "ng-packagr -w -p ng-package.json",
+    "docs": "typedoc",
+    "size": "size-limit",
     "format": "prettier --write .",
     "clean": "rimraf dist"
   },
@@ -23,33 +29,50 @@
     "signals",
     "matchMedia",
     "media-query",
+    "media-queries",
     "breakpoints",
-    "responsive"
+    "breakpoint-observer",
+    "responsive-design",
+    "responsive",
+    "ssr",
+    "ng"
   ],
   "license": "MIT",
   "sideEffects": false,
   "author": "Myroslav Martsin",
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
+  },
   "workspaces": [
     "demo"
   ],
   "peerDependencies": {
-    "@angular/common": ">=19 <22",
-    "@angular/core": ">=19 <22"
+    "@angular/common": ">=20 <23",
+    "@angular/core": ">=20 <23"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
+    "@analogjs/vite-plugin-angular": "^2.6.0",
+    "@analogjs/vitest-angular": "^2.6.0",
+    "@size-limit/preset-small-lib": "^12.1.0",
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",
+    "@vitest/coverage-v8": "^4.1.8",
     "concurrently": "^9.2.1",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
-    "jest": "^30.2.0",
-    "jest-environment-jsdom": "^30.2.0",
-    "jest-preset-angular": "^15.0.0",
+    "jsdom": "^26.1.0",
     "ng-packagr": "^20.3.0",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
-    "ts-jest": "^29.4.4",
-    "typescript": "^5.5"
+    "size-limit": "^12.1.0",
+    "typedoc": "^0.28.19",
+    "typedoc-material-theme": "^1.4.1",
+    "typescript": "^5.5",
+    "vite": "^7.1.5",
+    "vitest": "^4.1.8"
   }
 }

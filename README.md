@@ -1,182 +1,235 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/martsinlabs/ngx-mq/refs/heads/main/assets/logo.svg" width="160" alt="ngx-mq logo" />
+  <img src="https://raw.githubusercontent.com/martsinlabs/ngx-mq/refs/heads/main/assets/logo.svg" width="140" alt="ngx-mq" />
 </p>
 
-<h3 align="center">
-  Signal-Powered Breakpoints & Media Queries
-</h3>
+<h3 align="center">Signal-Powered Breakpoints &amp; Media Queries for Angular</h3>
 
-<h5 align="center">
+<p align="center">
+  Reactive <code>matchMedia</code> as Angular signals. SSR-safe, zoneless-ready, and free of RxJS.
+</p>
+
+<p align="center">
   <a href="https://github.com/martsinlabs/ngx-mq/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/martsinlabs/ngx-mq/ci.yml?branch=main&label=CI&color=44cc11&logo=github" alt="CI Status" />
+    <img src="https://img.shields.io/github/actions/workflow/status/martsinlabs/ngx-mq/ci.yml?branch=main&label=CI&color=44cc11&logo=github" alt="CI status" />
   </a>
   <a href="https://codecov.io/gh/martsinlabs/ngx-mq">
     <img src="https://codecov.io/gh/martsinlabs/ngx-mq/branch/main/graph/badge.svg" alt="coverage" />
   </a>
-  <br>
   <a href="https://www.npmjs.com/package/ngx-mq">
     <img src="https://img.shields.io/npm/v/ngx-mq.svg?color=007ec6" alt="npm version" />
   </a>
   <a href="https://www.npmjs.com/package/ngx-mq">
     <img src="https://img.shields.io/npm/dm/ngx-mq.svg?color=44cc11" alt="npm downloads" />
   </a>
+  <a href="https://bundlephobia.com/package/ngx-mq">
+    <img src="https://img.shields.io/bundlephobia/minzip/ngx-mq.svg?color=44cc11&label=minzip" alt="minzipped size" />
+  </a>
   <a href="https://opensource.org/license/MIT">
     <img src="https://img.shields.io/npm/l/ngx-mq.svg?color=44cc11" alt="license" />
   </a>
-</h5>
-
-<br>
-
-## Features
-
-- Lightweight
-- SSR-safe
-- Auto-cleanup
-- Angular 19–21 (use `ngx-mq@1` for Angular 16–18)
-- Well-tested
-
-## Introduction
-
-Built on the native [matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) API, NGX-MQ brings a signal-based and declarative way to handle breakpoints and media queries in Angular. Lifecycle management is fully automated via `DestroyRef`, removing the need for manual cleanup. Under the hood, it leverages the Multiton and Flyweight patterns for efficient instance reuse and consistent behavior across your app.
-
-> **Tip:** Always call query utilities within Angular’s [injection context](https://angular.dev/guide/di/dependency-injection-context) to keep them in sync with the framework’s lifecycle.
-
-## Live Demo
-
-Try it on [StackBlitz](https://stackblitz.com/github/martsinlabs/ngx-mq-demo/tree/demo/v2?file=src%2Fapp%2Fapp.component.ts)
-
-## Installation
-
-Choose the package version that matches your Angular setup:
-
-```bash
-# For Angular 16–18
-npm install ngx-mq@1
-
-# For Angular 19–21
-npm install ngx-mq@2
-```
-
-## Breakpoint API
-
-### Configuration
-
-Create a custom breakpoint map or use one of the built-in presets (e.g. `provideTailwindBreakpoints()`).
-
-```ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
-import { provideBreakpoints } from 'ngx-mq';
-
-bootstrapApplication(AppComponent, {
-  providers: [
-    // Define a custom map (keys are named ranges, values are widths in pixels)
-    provideBreakpoints({
-      sm: 640,
-      md: 768,
-      lg: 1024,
-    }),
-  ],
-});
-```
-
-**Available presets**
-
-- **Tailwind** → `sm: 640, md: 768, lg: 1024, xl: 1280, 2xl: 1536`
-- **Bootstrap** → `sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400`
-- **Material** → `sm: 600, md: 905, lg: 1240, xl: 1440`
-
-### BP-related utilities
-
-| Function  | Parameters                                                        | Returns           | Description                                   |
-| --------- | ----------------------------------------------------------------- | ----------------- | --------------------------------------------- |
-| `up`      | `bp: string, options?: CreateMediaQueryOptions`                   | `Signal<boolean>` | `true` when viewport width ≥ breakpoint       |
-| `down`    | `bp: string, options?: CreateMediaQueryOptions`                   | `Signal<boolean>` | `true` when viewport width < breakpoint       |
-| `between` | `minBp: string, maxBp: string, options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when viewport width is in range [min, max) |
-
-> **Note:** `down` and `between` upper bounds are **exclusive** — epsilon is subtracted from `max` so adjacent ranges (e.g. `down('md')` and `up('md')`) never overlap.
-
-> **Tip:** Wrap these APIs into reusable helpers:
-
-```ts
-// viewport-utils.ts
-import { Signal } from '@angular/core';
-import { up, down, between } from 'ngx-mq';
-
-export const isMobile = (): Signal<boolean> => down('md');
-export const isTablet = (): Signal<boolean> => between('md', 'lg');
-export const isDesktop = (): Signal<boolean> => up('lg');
-```
-
-## Common utilities
-
-Utils exposing common CSS media features.
-
-| Function        | Parameters                                                               | Returns           | Description                                                                     |
-| --------------- | ------------------------------------------------------------------------ | ----------------- | ------------------------------------------------------------------------------- |
-| `orientation`   | `value: 'portrait' \| 'landscape', options?: CreateMediaQueryOptions`    | `Signal<boolean>` | `true` when the current screen orientation matches the specified value.         |
-| `colorScheme`   | `value: 'light' \| 'dark', options?: CreateMediaQueryOptions`            | `Signal<boolean>` | `true` when the system color scheme matches the specified value.                |
-| `displayMode`   | `value: DisplayModeOption, options?: CreateMediaQueryOptions`            | `Signal<boolean>` | `true` when the current display mode matches the specified value.               |
-| `reducedMotion` | `options?: CreateMediaQueryOptions`                                      | `Signal<boolean>` | `true` when the user has enabled reduced motion.                                |
-| `hover`         | `options?: CreateMediaQueryOptions`                                      | `Signal<boolean>` | `true` when the user's primary input device supports hover capability.          |
-| `anyHover`      | `options?: CreateMediaQueryOptions`                                      | `Signal<boolean>` | `true` when any available input device supports hover capability.               |
-| `pointer`       | `value: 'fine' \| 'coarse' \| 'none', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when the user's primary input device matches the specified pointer type. |
-| `anyPointer`    | `value: 'fine' \| 'coarse' \| 'none', options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when any available input device matches the specified pointer type.      |
-| `colorGamut`    | `value: 'srgb' \| 'p3' \| 'rec2020', options?: CreateMediaQueryOptions`  | `Signal<boolean>` | `true` when the user's display supports the specified color gamut.              |
+</p>
 
 ---
 
-## Generic Media Query API
+## Features
 
-Works with any valid [CSS media query](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries) and returns a `Signal<boolean>` which automatically updates when the query result changes.
+- **Signal-native**: every query is a `Signal<boolean>` that updates as the viewport changes.
+- **SSR-safe**: returns a configurable static value on the server, then hydrates on the client.
+- **Auto-cleanup**: listeners are tied to Angular's `DestroyRef`; no manual teardown.
+- **Efficient**: one shared `matchMedia` listener per unique query, reused across the app.
+- **Batteries included**: Tailwind, Bootstrap and Material breakpoint presets out of the box.
+- **Composable**: combine any signals with `and` / `or` / `not`.
+- **Tiny and tested**: ~1.9 kB gzipped, 100% line coverage.
 
-| Function           | Parameters                                         | Returns           | Description                                               |
-| ------------------ | -------------------------------------------------- | ----------------- | --------------------------------------------------------- |
-| `matchMediaSignal` | `query: string, options?: CreateMediaQueryOptions` | `Signal<boolean>` | Provides a signal representing the state of a media query |
+## Why ngx-mq?
 
-> **Tip:** Use this API for media queries that are not part of your breakpoint map.
+Angular's CDK ships [`BreakpointObserver`](https://material.angular.io/cdk/layout/overview), which
+works well but is built around RxJS and raw query strings. `ngx-mq` is designed for the signals era:
+templates read a value directly, there is nothing to subscribe to, and cleanup is automatic.
+
+|                       | `ngx-mq`                                          | CDK `BreakpointObserver`                  |
+| --------------------- | ------------------------------------------------- | ----------------------------------------- |
+| Reactivity            | `Signal<boolean>`                                 | `Observable<BreakpointState>`             |
+| Cleanup               | Automatic via `DestroyRef`                         | Manual (`unsubscribe` / `takeUntilDestroyed`) |
+| Template usage        | `@if (isDesktop())`                                | `async` pipe or manual subscription        |
+| Named breakpoints     | Tailwind, Bootstrap, Material presets or your own | Material breakpoints or raw strings        |
+| Media-feature helpers | `colorScheme`, `hover`, `pointer`, ...            | Raw query strings                          |
+| Composition           | `and` / `or` / `not`                              | RxJS operators                             |
+| SSR                   | Configurable static value                          | Handle it yourself                         |
+| Footprint             | ~1.9 kB standalone                                 | Part of `@angular/cdk`                     |
+
+If you already pull in `@angular/cdk` and live in RxJS, `BreakpointObserver` is a fine choice. If you
+want a signals-first, zoneless-friendly API with batteries included, reach for `ngx-mq`.
+
+## Documentation
+
+- **API reference and guides:** https://martsinlabs.github.io/ngx-mq
+- **Live demo:** [StackBlitz](https://stackblitz.com/github/martsinlabs/ngx-mq-demo/tree/demo/v2?file=src%2Fapp%2Fapp.component.ts)
+
+## Installation
+
+Install the major version that matches your Angular version:
+
+| Angular | Install            |
+| ------- | ------------------ |
+| 20 - 22 | `npm i ngx-mq@3`   |
+| 19      | `npm i ngx-mq@2`   |
+| 16 - 18 | `npm i ngx-mq@1`   |
+
+## Quick start
+
+**1. Provide a breakpoint map** at bootstrap (a custom map or a preset):
 
 ```ts
-import { Signal } from '@angular/core';
-import { matchMediaSignal } from 'ngx-mq';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideBreakpoints } from 'ngx-mq';
+import { AppComponent } from './app/app.component';
 
-// Example: track orientation changes
-export const isLandscape = (): Signal<boolean> => matchMediaSignal('(orientation: landscape)');
+bootstrapApplication(AppComponent, {
+  providers: [provideBreakpoints({ sm: 640, md: 768, lg: 1024 })],
+});
 ```
 
-## Providers
-
-These functions return standard Angular `Provider` instances that can be injected at any level of the application hierarchy.
-
-| Provider                        | Parameters           | Description                                                                                                                |
-| ------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `provideBreakpoints()`          | `bps: MqBreakpoints` | Registers a custom set of breakpoints.                                                                                     |
-| `provideTailwindBreakpoints()`  | none                 | Registers the default Tailwind CSS breakpoints.                                                                            |
-| `provideBootstrapBreakpoints()` | none                 | Registers the default Bootstrap breakpoints.                                                                               |
-| `provideMaterialBreakpoints()`  | none                 | Registers the default Material 2 breakpoints.                                                                              |
-| `provideBreakpointEpsilon()`    | `epsilon: number`    | Sets the epsilon threshold used when comparing breakpoint values.                                                          |
-| `provideSsrValue()`             | `value: boolean`     | Defines the static signal value used during SSR, since media queries are not available on the server. Defaults to `false`. |
-
-> 💡 To register these as environment providers, wrap them with [`makeEnvironmentProviders()`](https://angular.dev/api/core/makeEnvironmentProviders).
-
-## Types
+**2. Use the helpers** as signals inside any component:
 
 ```ts
-export type MqBreakpoints = Record<string, number>;
+import { Component } from '@angular/core';
+import { up, down, between } from 'ngx-mq';
 
-export interface CreateMediaQueryOptions {
-  /**
-   * Static signal value used during SSR.
-   */
+@Component({
+  selector: 'app-root',
+  template: `
+    @if (isDesktop()) {
+      <app-sidebar />
+    }
+  `,
+})
+export class AppComponent {
+  readonly isMobile = down('md');
+  readonly isTablet = between('md', 'lg');
+  readonly isDesktop = up('lg');
+}
+```
+
+> **Tip:** Call the helpers within Angular's [injection context](https://angular.dev/guide/di/dependency-injection-context) (component fields, `inject`, factories) so their lifecycle stays in sync with the framework.
+
+## API
+
+Every query helper returns a `Signal<boolean>` and accepts an optional `options` argument
+([`CreateMediaQueryOptions`](#options)). The `options` column is omitted below for brevity.
+
+### Configuration
+
+Register breakpoints once, then refer to them by name. Use a custom map or a preset:
+
+```ts
+import {
+  provideBreakpoints,
+  provideTailwindBreakpoints,
+  provideBootstrapBreakpoints,
+  provideMaterialBreakpoints,
+} from 'ngx-mq';
+```
+
+| Preset      | Breakpoints                                      |
+| ----------- | ------------------------------------------------ |
+| Tailwind    | `sm: 640, md: 768, lg: 1024, xl: 1280, 2xl: 1536` |
+| Bootstrap   | `sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400`  |
+| Material    | `sm: 600, md: 905, lg: 1240, xl: 1440`            |
+
+### Breakpoints
+
+| Helper    | Arguments        | `true` when                          |
+| --------- | ---------------- | ------------------------------------ |
+| `up`      | `bp`             | viewport width `>=` `bp`             |
+| `down`    | `bp`             | viewport width `<` `bp`              |
+| `between` | `minBp`, `maxBp` | viewport width is in `[minBp, maxBp)` |
+
+> **Note:** `down` and `between` upper bounds are **exclusive**: a small epsilon is subtracted
+> from the max so adjacent ranges (e.g. `down('md')` and `up('md')`) never overlap. Tune it with
+> [`provideBreakpointEpsilon`](#providers).
+
+### Media features
+
+| Helper          | Arguments                      | `true` when                          |
+| --------------- | ------------------------------ | ------------------------------------ |
+| `orientation`   | `'portrait' \| 'landscape'`    | the screen orientation matches       |
+| `colorScheme`   | `'light' \| 'dark'`            | the system color scheme matches      |
+| `displayMode`   | `DisplayModeOption`            | the display mode matches (PWA detection) |
+| `reducedMotion` | none                           | the user prefers reduced motion      |
+| `hover`         | none                           | the primary pointer can hover        |
+| `anyHover`      | none                           | any available pointer can hover      |
+| `pointer`       | `'fine' \| 'coarse' \| 'none'` | the primary pointer matches          |
+| `anyPointer`    | `'fine' \| 'coarse' \| 'none'` | any available pointer matches        |
+| `colorGamut`    | `'srgb' \| 'p3' \| 'rec2020'`  | the display covers the gamut         |
+
+### Custom queries
+
+For anything without a dedicated helper, pass a raw CSS media query:
+
+```ts
+import { matchMediaSignal } from 'ngx-mq';
+
+readonly isRetina = matchMediaSignal('(min-resolution: 2dppx)');
+```
+
+### Composition
+
+Combine boolean signals into derived ones. Combinators work at the signal level, so the underlying
+listeners stay shared and are still cleaned up automatically.
+
+| Helper | Arguments                          | `true` when                                |
+| ------ | ---------------------------------- | ------------------------------------------ |
+| `and`  | `...conditions: Signal<boolean>[]` | every condition is `true` (empty: `true`)  |
+| `or`   | `...conditions: Signal<boolean>[]` | any condition is `true` (empty: `false`)   |
+| `not`  | `condition: Signal<boolean>`       | the condition is `false`                   |
+
+```ts
+import { and, or, not, up, down, hover, orientation, reducedMotion } from 'ngx-mq';
+
+// Large screen, in landscape, with a hover-capable pointer
+readonly isLandscapeDesktop = and(up('lg'), orientation('landscape'), hover());
+
+// Small screens OR a reduced-motion preference
+readonly prefersSimpleUi = or(down('md'), reducedMotion());
+
+// Devices without hover (touch-like): `hover()` has no direct inverse helper
+readonly isTouchLike = not(hover());
+```
+
+### Providers
+
+Each returns a standard Angular `Provider` you can register at any injector level.
+
+| Provider                        | Argument             | Description                                            |
+| ------------------------------- | -------------------- | ----------------------------------------------------- |
+| `provideBreakpoints`            | `bps: MqBreakpoints` | Registers a custom breakpoint map.                    |
+| `provideTailwindBreakpoints`    | none                 | Registers the Tailwind preset.                        |
+| `provideBootstrapBreakpoints`   | none                 | Registers the Bootstrap preset.                       |
+| `provideMaterialBreakpoints`    | none                 | Registers the Material 2 preset.                      |
+| `provideBreakpointEpsilon`      | `epsilon: number`    | Sets the exclusive-bound epsilon (default `0.02`).    |
+| `provideSsrValue`               | `value: boolean`     | Sets the value signals report during SSR (default `false`). |
+
+> **Tip:** To register these as environment providers, wrap them with
+> [`makeEnvironmentProviders`](https://angular.dev/api/core/makeEnvironmentProviders).
+
+### Options
+
+```ts
+interface CreateMediaQueryOptions {
+  /** Value the signal reports during SSR. Overrides the app-wide `provideSsrValue`. */
   ssrValue?: boolean;
-
-  /**
-   * A debug name for the signal. Used in Angular DevTools to identify the signal.
-   */
+  /** Debug name shown for the signal in Angular DevTools. */
   debugName?: string;
 }
+```
 
-export type DisplayModeOption =
+### Types
+
+```ts
+type MqBreakpoints = Record<string, number>;
+
+type DisplayModeOption =
   | 'browser'
   | 'fullscreen'
   | 'standalone'
@@ -184,6 +237,33 @@ export type DisplayModeOption =
   | 'window-controls-overlay'
   | 'picture-in-picture';
 ```
+
+## Server-side rendering
+
+`matchMedia` does not exist on the server, so during SSR every signal returns a static value and
+no listeners are created. Set the default with `provideSsrValue`, or override it per call:
+
+```ts
+provideSsrValue(false);          // app-wide default
+up('lg', { ssrValue: true });    // per-call override
+```
+
+Once the app hydrates in the browser, each signal switches to the live query result.
+
+## How it works
+
+`ngx-mq` keeps a single `MediaQueryList` and writable signal per unique query in a global registry
+(Multiton + Flyweight). Callers share that signal, and a reference count tied to `DestroyRef`
+removes the listener and registry entry once the last consumer is destroyed. No manual cleanup, no
+duplicate listeners.
+
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](https://github.com/martsinlabs/ngx-mq/blob/main/CONTRIBUTING.md).
+
+## License
+
+[MIT](https://github.com/martsinlabs/ngx-mq/blob/main/LICENSE) © Martsin Labs
 
 ## Sponsors
 
@@ -194,7 +274,7 @@ export type DisplayModeOption =
         <img
           src="https://raw.githubusercontent.com/getsentry/sentry/7b65f0f23d7eb5ccc035b12776bf5d8f3d9f8965/static/images/logo-sentry.svg"
           width="120"
-          alt="Sentry Logo" />
+          alt="Sentry" />
       </p>
       <p>
         <a href="https://sentry.io" target="_blank"><strong>Sentry</strong></a>
@@ -204,7 +284,3 @@ export type DisplayModeOption =
     </td>
   </tr>
 </table>
-
-## Contributing
-
-[CONTRIBUTING.md](https://github.com/martsinlabs/ngx-mq/blob/main/CONTRIBUTING.md)

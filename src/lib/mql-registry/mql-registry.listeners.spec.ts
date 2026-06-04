@@ -1,9 +1,10 @@
+import { describe, it, expect, vi } from 'vitest';
 import { addChangeListenerToMql, removeChangeListenerFromMql } from './mql-registry.listeners';
 
 describe('mql-listeners', () => {
   describe('addChangeListenerToMql()', () => {
     it('should use addEventListener in modern browsers', () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       const mql = window.matchMedia('(min-width: 768px)');
 
       addChangeListenerToMql(mql, onChange);
@@ -12,8 +13,8 @@ describe('mql-listeners', () => {
     });
 
     it('should fallback to addListener when addEventListener is not supported', () => {
-      const onChange = jest.fn();
-      const legacyMql = { addListener: jest.fn() } as any;
+      const onChange = vi.fn();
+      const legacyMql = { addListener: vi.fn() } as any;
 
       addChangeListenerToMql(legacyMql, onChange);
 
@@ -23,7 +24,7 @@ describe('mql-listeners', () => {
 
   describe('removeChangeListenerFromMql()', () => {
     it('should use removeEventListener in modern browsers', () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       const mql = window.matchMedia('(min-width: 768px)');
 
       removeChangeListenerFromMql(mql, onChange);
@@ -32,8 +33,8 @@ describe('mql-listeners', () => {
     });
 
     it('should fallback to removeListener when removeEventListener is not supported', () => {
-      const onChange = jest.fn();
-      const legacyMql = { removeListener: jest.fn() } as any;
+      const onChange = vi.fn();
+      const legacyMql = { removeListener: vi.fn() } as any;
 
       removeChangeListenerFromMql(legacyMql, onChange);
 
