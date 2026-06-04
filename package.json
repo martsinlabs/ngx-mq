@@ -1,7 +1,7 @@
 {
   "name": "ngx-mq",
   "version": "3.0.0-next.0",
-  "description": "Signal-powered breakpoints and media queries for Angular.",
+  "description": "Signal-powered breakpoints and media queries for Angular. SSR-safe, zoneless-ready, no RxJS.",
   "repository": {
     "type": "git",
     "url": "https://github.com/martsinlabs/ngx-mq.git"
@@ -29,8 +29,13 @@
     "signals",
     "matchMedia",
     "media-query",
+    "media-queries",
     "breakpoints",
-    "responsive"
+    "breakpoint-observer",
+    "responsive-design",
+    "responsive",
+    "ssr",
+    "ng"
   ],
   "license": "MIT",
   "sideEffects": false,

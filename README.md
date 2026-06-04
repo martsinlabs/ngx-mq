@@ -5,7 +5,7 @@
 <h3 align="center">Signal-Powered Breakpoints &amp; Media Queries for Angular</h3>
 
 <p align="center">
-  Reactive <code>matchMedia</code> as Angular signals, with automatic cleanup and SSR safety.
+  Reactive <code>matchMedia</code> as Angular signals. SSR-safe, zoneless-ready, and free of RxJS.
 </p>
 
 <p align="center">
@@ -40,6 +40,26 @@
 - **Batteries included**: Tailwind, Bootstrap and Material breakpoint presets out of the box.
 - **Composable**: combine any signals with `and` / `or` / `not`.
 - **Tiny and tested**: ~1.9 kB gzipped, 100% line coverage.
+
+## Why ngx-mq?
+
+Angular's CDK ships [`BreakpointObserver`](https://material.angular.io/cdk/layout/overview), which
+works well but is built around RxJS and raw query strings. `ngx-mq` is designed for the signals era:
+templates read a value directly, there is nothing to subscribe to, and cleanup is automatic.
+
+|                       | `ngx-mq`                                          | CDK `BreakpointObserver`                  |
+| --------------------- | ------------------------------------------------- | ----------------------------------------- |
+| Reactivity            | `Signal<boolean>`                                 | `Observable<BreakpointState>`             |
+| Cleanup               | Automatic via `DestroyRef`                         | Manual (`unsubscribe` / `takeUntilDestroyed`) |
+| Template usage        | `@if (isDesktop())`                                | `async` pipe or manual subscription        |
+| Named breakpoints     | Tailwind, Bootstrap, Material presets or your own | Material breakpoints or raw strings        |
+| Media-feature helpers | `colorScheme`, `hover`, `pointer`, ...            | Raw query strings                          |
+| Composition           | `and` / `or` / `not`                              | RxJS operators                             |
+| SSR                   | Configurable static value                          | Handle it yourself                         |
+| Footprint             | ~1.9 kB standalone                                 | Part of `@angular/cdk`                     |
+
+If you already pull in `@angular/cdk` and live in RxJS, `BreakpointObserver` is a fine choice. If you
+want a signals-first, zoneless-friendly API with batteries included, reach for `ngx-mq`.
 
 ## Documentation
 
