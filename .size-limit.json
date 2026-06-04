@@ -1,0 +1,9 @@
+[
+  {
+    "name": "ESM bundle (gzip)",
+    "path": "dist/fesm2022/ngx-mq.mjs",
+    "limit": "2.5 kB",
+    "gzip": true,
+    "ignore": ["@angular/core", "@angular/common"]
+  }
+]

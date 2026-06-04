@@ -20,6 +20,9 @@
   <a href="https://www.npmjs.com/package/ngx-mq">
     <img src="https://img.shields.io/npm/dm/ngx-mq.svg?color=44cc11" alt="npm downloads" />
   </a>
+  <a href="https://bundlephobia.com/package/ngx-mq">
+    <img src="https://img.shields.io/bundlephobia/minzip/ngx-mq.svg?color=44cc11&label=minzip" alt="minzipped size" />
+  </a>
   <a href="https://opensource.org/license/MIT">
     <img src="https://img.shields.io/npm/l/ngx-mq.svg?color=44cc11" alt="license" />
   </a>

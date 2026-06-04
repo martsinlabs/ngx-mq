@@ -16,6 +16,7 @@
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "build": "ng-packagr -p ng-package.json",
     "build:watch": "ng-packagr -w -p ng-package.json",
+    "size": "size-limit",
     "format": "prettier --write .",
     "clean": "rimraf dist"
   },
@@ -40,6 +41,7 @@
   "devDependencies": {
     "@analogjs/vite-plugin-angular": "^2.6.0",
     "@analogjs/vitest-angular": "^2.6.0",
+    "@size-limit/preset-small-lib": "^12.1.0",
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",
     "@vitest/coverage-v8": "^4.1.8",
@@ -50,6 +52,7 @@
     "ng-packagr": "^20.3.0",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
+    "size-limit": "^12.1.0",
     "typescript": "^5.5",
     "vite": "^7.1.5",
     "vitest": "^4.1.8"

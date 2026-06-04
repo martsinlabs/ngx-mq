@@ -38,6 +38,9 @@ jobs:
           echo "Building for branch: ${{ github.ref_name }}"
           npm run build
 
+      - name: Check bundle size
+        run: npm run size
+
       # --- Upload coverage only for main branch ---
       - name: Upload coverage reports to Codecov
         if: github.ref_name == 'main'
