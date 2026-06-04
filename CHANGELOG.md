@@ -9,11 +9,12 @@ For releases prior to `3.0.0`, see the [GitHub releases](https://github.com/mart
 
 ## [Unreleased]
 
-## [3.0.0-next.0]
+## [3.0.0] - 2026-06-04
 
 ### Added
 
 - `and()`, `or()` and `not()` helpers to compose boolean query signals declaratively.
+- `anyPointer()` and `colorGamut()` media-feature helpers.
 
 ### Changed
 
@@ -22,5 +23,5 @@ For releases prior to `3.0.0`, see the [GitHub releases](https://github.com/mart
 - Replaced the internal use of Angular's private signal primitives with the public
   `computed()` API, reducing the risk of breakage across Angular versions.
 
-[unreleased]: https://github.com/martsinlabs/ngx-mq/compare/v3.0.0-next.0...HEAD
-[3.0.0-next.0]: https://github.com/martsinlabs/ngx-mq/releases/tag/v3.0.0-next.0
+[unreleased]: https://github.com/martsinlabs/ngx-mq/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/martsinlabs/ngx-mq/releases/tag/v3.0.0
