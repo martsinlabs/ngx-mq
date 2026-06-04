@@ -85,9 +85,9 @@ bootstrapApplication(AppComponent, {
 
 **Available presets**
 
-- **Tailwind** → `sm: 640, md: 768, lg: 1024, xl: 1280, 2xl: 1536`
-- **Bootstrap** → `sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400`
-- **Material** → `sm: 600, md: 905, lg: 1240, xl: 1440`
+- **Tailwind**: `sm: 640, md: 768, lg: 1024, xl: 1280, 2xl: 1536`
+- **Bootstrap**: `sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400`
+- **Material**: `sm: 600, md: 905, lg: 1240, xl: 1440`
 
 ### BP-related utilities
 
@@ -97,7 +97,7 @@ bootstrapApplication(AppComponent, {
 | `down`    | `bp: string, options?: CreateMediaQueryOptions`                   | `Signal<boolean>` | `true` when viewport width < breakpoint       |
 | `between` | `minBp: string, maxBp: string, options?: CreateMediaQueryOptions` | `Signal<boolean>` | `true` when viewport width is in range [min, max) |
 
-> **Note:** `down` and `between` upper bounds are **exclusive** — epsilon is subtracted from `max` so adjacent ranges (e.g. `down('md')` and `up('md')`) never overlap.
+> **Note:** `down` and `between` upper bounds are **exclusive**: epsilon is subtracted from `max` so adjacent ranges (e.g. `down('md')` and `up('md')`) never overlap.
 
 > **Tip:** Wrap these APIs into reusable helpers:
 
@@ -109,6 +109,30 @@ import { up, down, between } from 'ngx-mq';
 export const isMobile = (): Signal<boolean> => down('md');
 export const isTablet = (): Signal<boolean> => between('md', 'lg');
 export const isDesktop = (): Signal<boolean> => up('lg');
+```
+
+## Composition
+
+Combine any boolean query signals into derived ones. Combinators work at the signal level, so the underlying media-query listeners are still shared and cleaned up automatically.
+
+| Function | Parameters                       | Returns           | Description                                                  |
+| -------- | -------------------------------- | ----------------- | ------------------------------------------------------------ |
+| `and`    | `...conditions: Signal<boolean>[]` | `Signal<boolean>` | `true` when **every** condition is `true` (empty defaults to `true`)  |
+| `or`     | `...conditions: Signal<boolean>[]` | `Signal<boolean>` | `true` when **any** condition is `true` (empty defaults to `false`)   |
+| `not`    | `condition: Signal<boolean>`       | `Signal<boolean>` | Negates a condition                                          |
+
+```ts
+import { Signal } from '@angular/core';
+import { and, or, not, up, down, hover, orientation, reducedMotion } from 'ngx-mq';
+
+// Large screen, in landscape, with a hover-capable pointer
+export const isLandscapeDesktop = (): Signal<boolean> => and(up('lg'), orientation('landscape'), hover());
+
+// Small screens OR a reduced-motion preference: render a simplified UI
+export const prefersSimpleUi = (): Signal<boolean> => or(down('md'), reducedMotion());
+
+// Devices without hover (touch-like): there is no direct inverse helper for `hover()`
+export const isTouchLike = (): Signal<boolean> => not(hover());
 ```
 
 ## Common utilities
