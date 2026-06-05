@@ -175,6 +175,7 @@ Every query helper returns a `Signal<boolean>` and accepts an optional `options`
 | `colorScheme`   | `'light' \| 'dark'`            | the system color scheme matches          |
 | `displayMode`   | `DisplayModeOption`            | the display mode matches (PWA detection) |
 | `reducedMotion` | none                           | the user prefers reduced motion          |
+| `prefersContrast` | `'more' \| 'less' \| 'no-preference' \| 'custom'` | the user's contrast preference matches |
 | `hover`         | none                           | the primary pointer can hover            |
 | `anyHover`      | none                           | any available pointer can hover          |
 | `pointer`       | `'fine' \| 'coarse' \| 'none'` | the primary pointer matches              |

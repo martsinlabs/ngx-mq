@@ -9,6 +9,10 @@ For releases prior to `3.0.0`, see the [GitHub releases](https://github.com/mart
 
 ## [Unreleased]
 
+### Added
+
+- `prefersContrast()` media-feature helper.
+
 ## [3.0.0] - 2026-06-04
 
 ### Added
