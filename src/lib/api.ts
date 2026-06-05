@@ -226,6 +226,38 @@ export function reducedMotion(options?: CreateMediaQueryOptions): Signal<boolean
 }
 
 /**
+ * Tracks the user's contrast preference via `(prefers-contrast: ...)`.
+ *
+ * @param value - `'more'`, `'less'`, `'no-preference'`, or `'custom'`.
+ * @param options - Optional per-call settings ({@link CreateMediaQueryOptions}).
+ * @returns A `Signal<boolean>` that is `true` while the contrast preference matches `value`.
+ *
+ * @remarks Must be called within an Angular
+ * [injection context](https://angular.dev/guide/di/dependency-injection-context).
+ *
+ * @example
+ * ```ts
+ * readonly wantsMoreContrast = prefersContrast('more');
+ * ```
+ *
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-contrast | MDN: prefers-contrast}
+ * @category Media Features
+ */
+export function prefersContrast(
+  value: 'more' | 'less' | 'no-preference' | 'custom',
+  options?: CreateMediaQueryOptions
+): Signal<boolean> {
+  isDevMode() && assertInInjectionContext(prefersContrast);
+
+  const query: string = normalizeQuery(`(prefers-contrast: ${value})`);
+  const consumer: Signal<boolean> = createConsumer(query, options);
+
+  consumer.toString = () => createConsumerLabel(`prefersContrast(${value})`);
+
+  return consumer;
+}
+
+/**
  * Tracks whether the **primary** input device can hover via `(hover: hover)`.
  *
  * @param options - Optional per-call settings ({@link CreateMediaQueryOptions}).

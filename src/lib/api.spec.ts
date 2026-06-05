@@ -11,6 +11,7 @@ import {
   colorScheme,
   displayMode,
   reducedMotion,
+  prefersContrast,
   hover,
   anyHover,
   pointer,
@@ -92,6 +93,16 @@ describe('Public API', () => {
       expect(isSignal(signal)).toBe(true);
       expect(typeof signal()).toBe('boolean');
       expect(signal.toString()).toContain('reducedMotion');
+    });
+  });
+
+  describe('prefersContrast()', () => {
+    it('should return a boolean signal', () => {
+      const signal = TestBed.runInInjectionContext(() => prefersContrast('more'));
+
+      expect(isSignal(signal)).toBe(true);
+      expect(typeof signal()).toBe('boolean');
+      expect(signal.toString()).toContain('prefersContrast');
     });
   });
 

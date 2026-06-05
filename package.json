@@ -1,6 +1,6 @@
 {
   "name": "ngx-mq",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Signal-powered breakpoints and media queries for Angular. SSR-safe, zoneless-ready, no RxJS.",
   "repository": {
     "type": "git",

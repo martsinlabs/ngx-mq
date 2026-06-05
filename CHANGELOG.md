@@ -9,6 +9,12 @@ For releases prior to `3.0.0`, see the [GitHub releases](https://github.com/mart
 
 ## [Unreleased]
 
+## [3.1.0] - 2026-06-05
+
+### Added
+
+- `prefersContrast()` media-feature helper.
+
 ## [3.0.0] - 2026-06-04
 
 ### Added
@@ -23,5 +29,6 @@ For releases prior to `3.0.0`, see the [GitHub releases](https://github.com/mart
 - Replaced the internal use of Angular's private signal primitives with the public
   `computed()` API, reducing the risk of breakage across Angular versions.
 
-[unreleased]: https://github.com/martsinlabs/ngx-mq/compare/v3.0.0...HEAD
+[unreleased]: https://github.com/martsinlabs/ngx-mq/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/martsinlabs/ngx-mq/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/martsinlabs/ngx-mq/releases/tag/v3.0.0
