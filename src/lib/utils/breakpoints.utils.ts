@@ -51,6 +51,7 @@ export function normalizeBreakpoints(bps: MqBreakpoints): Readonly<MqBreakpoints
     const key = rawKey.trim();
 
     // Dev-only guard; the false branch never runs in production builds.
+    /* v8 ignore next */
     if (isDevMode()) validateBreakpointValue(key, value);
 
     out[key] = value;
