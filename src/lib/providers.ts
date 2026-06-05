@@ -78,6 +78,8 @@ export function provideMaterialBreakpoints(): Provider {
  * @category Providers
  */
 export function provideBreakpointEpsilon(epsilon: number = DEFAULT_BREAKPOINT_EPSILON): Provider {
+  // Dev-only guard; the false branch never runs in production builds.
+  /* v8 ignore next */
   if (isDevMode()) validateEpsilon(epsilon);
 
   return { provide: MQ_BREAKPOINT_EPSILON, useValue: epsilon };

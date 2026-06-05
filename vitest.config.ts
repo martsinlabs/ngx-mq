@@ -15,6 +15,12 @@ export default defineConfig(({ mode }) => ({
       include: ['src/**/*.ts'],
       exclude: ['src/**/*.spec.ts', 'src/test-setup.ts', 'src/index.ts'],
       reporter: ['text', 'lcov'],
+      thresholds: {
+        statements: 100,
+        branches: 100,
+        functions: 100,
+        lines: 100,
+      },
     },
   },
   define: {
