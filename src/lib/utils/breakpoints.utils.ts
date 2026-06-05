@@ -34,21 +34,24 @@ export function resolveBreakpoint(bp: string): number {
   return assertBreakpointExists(bp.trim(), breakpoints);
 }
 
+function validateBreakpointValue(key: string, value: number): void {
+  if (!Number.isFinite(value)) {
+    throw new Error(`[ngx-mq] Breakpoint "${key}" must be a finite number, got ${value}.`);
+  }
+
+  if (value <= 0) {
+    throw new Error(`[ngx-mq] Breakpoint "${key}" must be > 0, got ${value}.`);
+  }
+}
+
 export function normalizeBreakpoints(bps: MqBreakpoints): Readonly<MqBreakpoints> {
   const out: Record<string, number> = {};
 
   for (const [rawKey, value] of Object.entries(bps)) {
     const key = rawKey.trim();
 
-    if (isDevMode()) {
-      if (!Number.isFinite(value)) {
-        throw new Error(`[ngx-mq] Breakpoint "${key}" must be a finite number, got ${value}.`);
-      }
-
-      if (value <= 0) {
-        throw new Error(`[ngx-mq] Breakpoint "${key}" must be > 0, got ${value}.`);
-      }
-    }
+    // Dev-only guard; the false branch never runs in production builds.
+    if (isDevMode()) validateBreakpointValue(key, value);
 
     out[key] = value;
   }

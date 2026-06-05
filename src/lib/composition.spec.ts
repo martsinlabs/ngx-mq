@@ -39,6 +39,10 @@ describe('Combinators', () => {
     it('returns false for an empty call', () => {
       expect(or()()).toBe(false);
     });
+
+    it('exposes a readable debug label', () => {
+      expect(or(signal(false)).toString()).toContain('or(');
+    });
   });
 
   describe('not()', () => {

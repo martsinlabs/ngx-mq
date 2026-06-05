@@ -43,6 +43,18 @@ describe('MQL Registry', () => {
       expect(signal1).toBe(signal2);
       expect(registry.size).toBe(1);
     });
+
+    it('should update the signal when the media query changes', () => {
+      const signal: Signal<boolean> = retain(query, createToken(), false);
+      const handle = _getRegistry().get(query)!;
+
+      handle.onChange({ matches: true } as MediaQueryListEvent);
+      expect(signal()).toBe(true);
+
+      // No event: falls back to the current mql.matches value.
+      handle.onChange();
+      expect(typeof signal()).toBe('boolean');
+    });
   });
 
   describe('release()', () => {

@@ -1,4 +1,4 @@
-import { computed, isDevMode, Signal, inject } from '@angular/core';
+import { computed, Signal, inject } from '@angular/core';
 import { retainUntilDestroy } from './mql-registry';
 import { CreateMediaQueryOptions } from './models';
 import { NGX_MQ_SSR_VALUE } from './tokens';
@@ -9,9 +9,7 @@ export function createConsumer(query: string, options?: CreateMediaQueryOptions)
 
   const querySignal: Signal<boolean> = retainUntilDestroy(query, effectiveSsrValue);
 
-  return computed(() => querySignal(), {
-    debugName: isDevMode() ? options?.debugName : undefined,
-  });
+  return computed(() => querySignal(), { debugName: options?.debugName });
 }
 
 export function createConsumerLabel(descriptor: string): string {

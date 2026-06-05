@@ -11,6 +11,13 @@ describe('Core API', () => {
         expect(typeof consumer()).toBe('boolean');
       });
     });
+
+    it('should honor the ssrValue and debugName options', () => {
+      runInInjectionContext(TestBed.inject(EnvironmentInjector), () => {
+        const consumer = createConsumer('(min-width: 1024px)', { ssrValue: true, debugName: 'my-signal' });
+        expect(typeof consumer()).toBe('boolean');
+      });
+    });
   });
 
   describe('createConsumerLabel()', () => {
