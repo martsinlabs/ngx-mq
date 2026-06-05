@@ -64,7 +64,7 @@ want a signals-first, zoneless-friendly API with batteries included, reach for `
 ## Documentation
 
 - **API reference and guides:** https://martsinlabs.github.io/ngx-mq
-- **Live demo:** [StackBlitz](https://stackblitz.com/github/martsinlabs/ngx-mq-demo/tree/demo/v2?file=src%2Fapp%2Fapp.component.ts)
+- **Live demo:** [StackBlitz](https://stackblitz.com/github/martsinlabs/ngx-mq-demo/tree/demo/v3)
 
 ## Installation
 

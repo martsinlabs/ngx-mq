@@ -12,14 +12,13 @@ describe('MQL Registry', () => {
   beforeEach(() => _resetRegistry());
 
   describe('retain()', () => {
-    it('should return a static signal when matchMedia is not available', () => {
-      const token: MqRetainToken = createToken();
+    it('should return a static signal honoring the ssrValue when matchMedia is not available', () => {
       const original: typeof globalThis.matchMedia = globalThis.matchMedia;
       Object.defineProperty(globalThis, 'matchMedia', { value: undefined });
 
-      const signal: Signal<boolean> = retain(query, token, false);
-
-      expect(typeof signal).toBe('function');
+      // The provided ssrValue must be reported as-is, never hardcoded to false.
+      expect(retain(query, createToken(), true)()).toBe(true);
+      expect(retain(query, createToken(), false)()).toBe(false);
       expect(_getRegistry().size).toBe(0);
 
       Object.defineProperty(globalThis, 'matchMedia', { writable: true, value: original });
